@@ -190,4 +190,7 @@ public class Team extends ArrayList<Player> {
 	public int getPoints() {
 		return points;
 	}
+	public HomeBase getHomeBase() {
+		return homeBase;
+	}
 }

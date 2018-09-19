@@ -108,5 +108,7 @@ public class Game {
 	public Team getWinningTeam() {
 		return WinningTeam;
 	}
-
+	public ArrayList<Team> getTeams() {
+		return teams;
+	}
 }

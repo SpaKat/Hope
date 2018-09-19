@@ -42,15 +42,22 @@ public class GameManager{
 		return game.getWinningTeam();
 	}
 
-	// ----------------------------------------- NEEDED FOR GUI ----------------------------------//
-	/*public int getTeams() {
-		// TODO Auto-generated method stub
-		return game.numOfTeams();
-	}
+	
 
-	public Team getTeam(int i) {
-		return game.getTeam(i);
-	}*/
+	// ----------------------------------------- NEEDED FOR GUI ----------------------------------//
+	
+	public Game getGame() {
+		return game;
+	}
+	public void spawntest() {
+		game.spawn();
+	}
+	public double getX() {
+		return gameboard.getX();
+	}
+	public double getY() {
+		return gameboard.getY();
+	}
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
 /*
 	public GameInfo sendInfo() {
@@ -58,6 +65,7 @@ public class GameManager{
 		return gameInfo;
 	}
 */
+
 
 
 
