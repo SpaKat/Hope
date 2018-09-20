@@ -3,6 +3,7 @@ package CaptureTheFlagGUI;
 import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
+import Server.ServerCommunication;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -10,11 +11,26 @@ import javafx.scene.control.MenuItem;
 public class CTFMenuBar extends MenuBar {
 
 	private GameManager gManager;
+	private ServerCommunication server;
 
 	public CTFMenuBar(GameManager gManager) {
 		this.gManager = gManager;
 		toFront();
 
+		//testFuncations();
+		Menu Server = new Menu("Server");
+		
+		MenuItem startServer = new MenuItem("Start Server");
+		
+		startServer.setOnAction(e->{
+			 server =new ServerCommunication(gManager);
+		});
+		
+		Server.getItems().add(startServer);
+		getMenus().add(Server);
+	}
+
+	private void testFuncations() {
 		Menu test = new Menu("Test");
 		MenuItem oneturn = new MenuItem ("One Turn");
 		oneturn.setOnAction(e ->{
@@ -49,7 +65,15 @@ public class CTFMenuBar extends MenuBar {
 		});
 		test.getItems().addAll(oneturn,spawn,hundredturn,spawnkill,killplayer,firebullet);
 		getMenus().add(test);
+	}
 
+	
+	public void end() {
+		try {
+		server.end();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

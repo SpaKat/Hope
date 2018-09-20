@@ -12,7 +12,6 @@ public class Statistics {
 	private final double MAXRATING = 100;
 	private final double SCALE = 50;
 	
-	
 	public Statistics(double attack,double defense,double health,double movespeed) {
 		this.attack = attack;
 		this.defense = defense;

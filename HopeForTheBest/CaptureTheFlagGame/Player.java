@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Player extends GameColorObject{
 
 
-	private double heading = Math.PI; // tan2
+	private double heading = 0; // tan2
 	private Statistics stats; //Customized
 	private ArrayList<Bullet> bullets = new ArrayList<>();
 	private int maxBullets = 1; 
