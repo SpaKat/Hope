@@ -7,22 +7,27 @@ public class CTFFlag extends Circle {
 
 	private Flag flag;
 	private CTFGame ctfGame;
-	
+
 	public CTFFlag(Flag flag, CTFGame ctfGame) {
 		this.flag = flag;
 		this.ctfGame = ctfGame;
 		setRadius(flag.getRadius());
 		setLayoutX(flag.getX());
 		setLayoutY(flag.getY());
-		setStyle("-fx-fill: " + new ColorHexConveter(flag.getColor()).toString() +";"
-				+"-fx-stroke: gold;"
-				+ "-fx-stroke-width:" + 2  +  ";");
-		ctfGame.getChildren().add(this);
+		setStyle("-fx-fill: white;"
+				+"-fx-stroke:" +new ColorHexConveter(flag.getColor()).toString() +";"
+				+ "-fx-stroke-width:" + (flag.getRadius()-2)  +  ";");
+		this.ctfGame.getChildren().add(this);
+		setVisible(false);
 	}
 
 	public void update() {
-		setLayoutX(flag.getX());
-		setLayoutY(flag.getY());
+		if(flag.isSpawned()) {
+			setVisible(true);
+			setLayoutX(flag.getX());
+			setLayoutY(flag.getY());
+			toFront();
+		}
 	}
 
 }

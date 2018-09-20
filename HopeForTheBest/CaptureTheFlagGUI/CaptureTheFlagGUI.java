@@ -10,7 +10,7 @@ public class CaptureTheFlagGUI extends Application {
 	public void start(Stage stage) {
 	
 		GameManagerGUI guiManager = new GameManagerGUI(); 
-		Scene scene = new Scene(guiManager,500,500);
+		Scene scene = new Scene(guiManager,500,520);
 		stage.setScene(scene);
 		stage.setTitle("Capture the Flag");
 		stage.setOnCloseRequest(close ->{

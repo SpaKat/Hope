@@ -13,6 +13,7 @@ public class CTFGame extends Pane {
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
+	
 	public CTFGame(GameManager gManager) {
 		this.game = gManager.getGame();
 		this.gManager = gManager;
@@ -22,7 +23,7 @@ public class CTFGame extends Pane {
 		});
 		backgroundUpdate = new CTFGameUpdate(this);
 		setStyle("-fx-background-color: black");
-		
+		toBack();
 	}
 
 	public void update() {
@@ -31,7 +32,6 @@ public class CTFGame extends Pane {
 		});
 		setHeight(gManager.getX());
 		setWidth(gManager.getY());
-		
 	}
 
 	public void end() {

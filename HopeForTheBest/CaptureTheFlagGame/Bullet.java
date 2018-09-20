@@ -11,7 +11,9 @@ public class Bullet extends GameColorObject {
 		setX(x);
 		setY(y);
 		this.damage = damage;
+		this.heading = heading;
 		setSpawned(true);
+		setRadius(3);
 	}
 	
 	public double getSpeed() {
@@ -35,5 +37,12 @@ public class Bullet extends GameColorObject {
 	}
 	public double getDamage() {
 		return damage;
+	}
+	public boolean done() {
+		boolean b = false;
+		if (bulletLength <= 0) {
+			b =true;
+		}
+		return b;
 	}
 }

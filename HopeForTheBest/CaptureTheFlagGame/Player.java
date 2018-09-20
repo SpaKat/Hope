@@ -9,7 +9,7 @@ public class Player extends GameColorObject{
 	private Statistics stats; //Customized
 	private ArrayList<Bullet> bullets = new ArrayList<>();
 	private int maxBullets = 1; 
-
+	private boolean disconnect = false;
 	private long RespawnTime = 3000;
 	private long DeathStart;
 
@@ -76,11 +76,19 @@ public class Player extends GameColorObject{
 				System.out.println("PLayer.java hit otherPlayer is died: " + otherPlayer.isDied());
 			}
 		}
-	
+
 	}
 
 	private void take(double damage) {
 		stats.take(damage);
 	}
-
+	public void setDisconnect(boolean disconnect) {
+		this.disconnect = disconnect;
+	}
+	public boolean isDisconnect() {
+		return disconnect;
+	}
+	public ArrayList<Bullet> getBullets() {
+		return bullets;
+	}
 }

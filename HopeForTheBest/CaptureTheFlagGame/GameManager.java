@@ -42,7 +42,9 @@ public class GameManager{
 		return game.getWinningTeam();
 	}
 
-	
+	public void removePlayer(Player player) {
+		game.removePlayer(player);
+	}
 
 	// ----------------------------------------- NEEDED FOR GUI ----------------------------------//
 	
@@ -65,6 +67,8 @@ public class GameManager{
 		return gameInfo;
 	}
 */
+
+	
 
 
 

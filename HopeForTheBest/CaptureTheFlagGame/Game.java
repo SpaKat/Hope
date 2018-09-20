@@ -111,4 +111,13 @@ public class Game {
 	public ArrayList<Team> getTeams() {
 		return teams;
 	}
+
+	public void removePlayer(Player player) {
+		teams.forEach(team ->{
+			
+			if(team.remove(player)) {
+				player.setDisconnect(true);
+			}
+		});
+	}
 }

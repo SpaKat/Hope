@@ -21,9 +21,6 @@ public class CTFGameUpdate extends Thread {
 					ctfGame.update();
 				}
 			});
-			
-			
-			
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {

@@ -23,10 +23,10 @@ public class RunMe {
 			System.out.println(players[j].getX() + "     "+ players[j].getY());
 		}*/
 			runATurn(gManager, players);
-			players[1] .setX(60);
+			/*players[1] .setX(60);
 			players[1].setY(60);
 			players[0].setY(60);
-			players[0].setX(30);
+			players[0].setX(30);*/
 			players[0].setHeading(2*Math.PI);
 			
 			
