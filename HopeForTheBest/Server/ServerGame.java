@@ -6,9 +6,8 @@ public class ServerGame extends Thread {
 	private GameManager gManager;
 	private boolean running = true;
 	public ServerGame(GameManager gManager) {
-this.gManager = gManager;
-
-	start();
+		this.gManager = gManager;
+		this.start();
 	}
 	@Override
 	public void run() {
@@ -16,10 +15,11 @@ this.gManager = gManager;
 			gManager.OneTurn();
 			try {Thread.sleep(100);} catch (InterruptedException e) {}
 		}
-		
+
 	}
 	public void end() {
 		running  = false;
 	}
+	
 
 }

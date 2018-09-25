@@ -1,9 +1,11 @@
 package Client;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import Message.Fire;
 import Message.Heading;
 import Message.StatsMessage;
 import Message.Teamid;
@@ -15,39 +17,40 @@ public class Client extends Thread {
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	public Client() {
-		try {
-			socket = new Socket("127.0.0.1", 8008);
-
-
-
-		} catch (Exception e) {
-
-		}
 		start();
 	}
 
 	@Override
 	public void run() {
 		try {
-			in = new ObjectInputStream(socket.getInputStream());
+			socket = new Socket("127.0.0.1", 8008);
 			out = new ObjectOutputStream(socket.getOutputStream());
-			
-			out.writeObject(new StatsMessage(5, 5, 5, 50));
-			out.flush();
-			out.writeObject(new Teamid(0));
-			out.flush();
-			double heading = 0;
-			while (true) {
-				heading += Math.PI*2 / 18;
-				
-				out.writeObject(new Heading(heading));
-				out.reset();
-				try{Thread.sleep(50);}catch(Exception d ) {}
-				
-			}
+			in = new ObjectInputStream(socket.getInputStream());
+			nor();
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			//System.out.println("WHAT!?!?!?!");
+		}
+		//while(true)				try{Thread.sleep(1);}catch (Exception e) {}
+
+	}
+
+	private void nor() throws IOException {
+		out.writeObject(new StatsMessage(5, 5, 5, 20));
+		out.reset();
+		out.writeObject(new Teamid(0));
+		out.reset();
+		double heading = 0;
+		while (true) {
+		//	heading += Math.PI*2 / 180;
+		//	System.out.println(heading);
+			out.writeObject(new Heading(heading));
+			out.reset();
+			out.writeObject(new Fire());
+			out.reset();
+			try{Thread.sleep(50);}catch(Exception d ) {}
+			
 		}
 	}
 

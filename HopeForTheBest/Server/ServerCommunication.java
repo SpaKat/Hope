@@ -15,27 +15,32 @@ public class ServerCommunication extends Thread{
 	private ArrayList<ServerCommClient> clients;
 	private ServerGame serverGame;
 	private ServerSocket serverSocket;
+	
 	public ServerCommunication(GameManager gManager) {
 		this.gManager = gManager;
 		clients = new ArrayList<ServerCommClient>();
 		setName("SERVER");
 		serverGame = new ServerGame(gManager);
-		start();
+		this.start();
 	}
 
 	@Override
 	public void run() {
-		while(running) {
-			try {
-				 serverSocket = new ServerSocket(port);
-				Socket socket = serverSocket.accept();
-				clients.add(new ServerCommClient(gManager,socket));
+		try {
+			serverSocket = new ServerSocket(port);
+			while(running) {
 
-				Thread.sleep(1);
-			} catch (Exception e) {
-				
+				Socket socket = serverSocket.accept();
+				clients.add(new ServerCommClient(gManager,socket));	
+				try{Thread.sleep(1);}catch (Exception e) {}
+
 			}
+			serverSocket.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
 	}
 	public void end() {
 		running  = false;
@@ -46,8 +51,10 @@ public class ServerCommunication extends Thread{
 		try {
 			serverSocket.close();
 		} catch (Exception e) {
-			
+
 		}
 	}
-
+	public static void main(String[] args) {
+		new ServerCommunication(new GameManager(500, 500));
+	}
 }

@@ -43,6 +43,10 @@ public class CTFPlayers extends Circle{
 			Bullet b = player.getBullets().get(i);
 			try {
 				CTFBullet ctfB = bullets.get(i);
+				if (ctfB.done()) {
+					bullets.remove(ctfB);
+			//		bullets.add(new CTFBullet(b,ctfGame));
+				}
 			}catch (Exception e) {
 				bullets.add(new CTFBullet(b,ctfGame));
 			}

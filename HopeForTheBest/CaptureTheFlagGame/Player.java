@@ -54,6 +54,7 @@ public class Player extends GameColorObject{
 				bullets.remove(bullets.get(i));
 			}
 		}
+		System.out.println(bullets.size());
 	}
 
 	public boolean readyToSpawn() {
