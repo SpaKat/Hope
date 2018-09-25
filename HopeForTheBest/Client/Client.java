@@ -37,7 +37,7 @@ public class Client extends Thread {
 	}
 
 	private void nor() throws IOException {
-		out.writeObject(new StatsMessage(5, 5, 5, 20));
+		out.writeObject(new StatsMessage(5, 5, 5, 80));
 		out.reset();
 		out.writeObject(new Teamid(0));
 		out.reset();

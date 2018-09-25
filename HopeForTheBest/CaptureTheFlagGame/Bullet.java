@@ -4,10 +4,10 @@ public class Bullet extends GameColorObject {
 
 	private double speed;
 	private double heading;
-	private double bulletLength = 75;
+	private double bulletLength = 125;
 	private double damage;
 	public Bullet(double x, double y,double heading, double damage) {
-		speed = 5;
+		speed = 8;
 		setX(x);
 		setY(y);
 		this.damage = damage;
