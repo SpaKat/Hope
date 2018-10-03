@@ -25,10 +25,11 @@ public class Flag extends GameColorObject{
 	}
 	public void move() {
 		if (player != null) {
-			setX(player.getX());
-			setY(player.getY());
 			if (player.isDied()) {
 				player = null;
+			}else {
+				setX(player.getX());
+				setY(player.getY());
 			}
 		}
 
