@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 import Message.Fire;
 import Message.Heading;
@@ -37,20 +38,37 @@ public class Client extends Thread {
 	}
 
 	private void nor() throws IOException {
-		out.writeObject(new StatsMessage(5, 5, 5, 80));
+		out.writeObject(new StatsMessage(5, 5, 5, 1));
 		out.reset();
-		out.writeObject(new Teamid(0));
+		out.writeObject(new Teamid(2));
 		out.reset();
-		double heading = 0;
+		double heading = Math.PI/2;
 		while (true) {
-		//	heading += Math.PI*2 / 180;
-		//	System.out.println(heading);
+			//	heading += Math.PI*2 / 180;
+			//	System.out.println(heading);
 			out.writeObject(new Heading(heading));
 			out.reset();
 			out.writeObject(new Fire());
 			out.reset();
+			/*Scanner scan = new Scanner(System.in);
+			switch (scan.next()) {
+			case "w":
+				heading = Math.PI*3/2.0;
+				break;
+			case "a":
+				heading = Math.PI;
+				break;
+			case "s":
+				heading = Math.PI/2.0;
+				break;
+			case "d":
+				heading = Math.PI*2;
+				break;
+			default:
+				break;
+			}*/
 			try{Thread.sleep(50);}catch(Exception d ) {}
-			
+
 		}
 	}
 

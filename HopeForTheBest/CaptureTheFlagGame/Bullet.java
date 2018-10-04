@@ -45,4 +45,8 @@ public class Bullet extends GameColorObject {
 		}
 		return b;
 	}
+
+	public void remove() {
+		bulletLength = 0;
+	}
 }

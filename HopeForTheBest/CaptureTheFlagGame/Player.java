@@ -74,6 +74,7 @@ public class Player extends GameColorObject{
 			if (deltaX<= range && deltaY <= range) {
 				otherPlayer.take(bullet.getDamage());
 				bullets.remove(bullet);
+				bullet.remove();
 				System.out.println("PLayer.java hit otherPlayer is died: " + otherPlayer.isDied());
 			}
 		}
