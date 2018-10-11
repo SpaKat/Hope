@@ -11,7 +11,7 @@ public class Player extends GameColorObject{
 	private int maxBullets = 1; 
 	private boolean disconnect = false;
 	private long RespawnTime = 3000;
-	private long DeathStart;
+	private long DeathStart = 0;
 
 	public Player(Statistics stats) {
 		this.stats = stats;
@@ -20,10 +20,12 @@ public class Player extends GameColorObject{
 
 	public boolean isDied() {
 		boolean died = false;
-		if (stats.getHealth()<=0) {
+		if (stats.getHealth()<=0 ) {
 			died = true;
-			setSpawned(false);
+			if(isSpawned()) {
 			DeathStart = System.currentTimeMillis();
+			}
+			setSpawned(false);
 		}
 		return died;
 
@@ -58,10 +60,13 @@ public class Player extends GameColorObject{
 	}
 
 	public boolean readyToSpawn() {
-		boolean ready = true;
+		boolean ready = false;
 		long delta = Math.abs(System.currentTimeMillis()- DeathStart);
-		if (delta <= RespawnTime) {
-			ready = false;
+		if (delta >= RespawnTime) {
+			ready = true;
+			DeathStart = 0;
+		}else {
+			stats.resetHealth();
 		}
 		return ready;
 	}
@@ -75,7 +80,7 @@ public class Player extends GameColorObject{
 				otherPlayer.take(bullet.getDamage());
 				bullets.remove(bullet);
 				bullet.remove();
-				System.out.println("PLayer.java hit otherPlayer is died: " + otherPlayer.isDied());
+		//		System.out.println("PLayer.java hit otherPlayer is died: " + otherPlayer.isDied());
 			}
 		}
 

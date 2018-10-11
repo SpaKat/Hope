@@ -32,6 +32,11 @@ public class CTFGame extends Pane {
 		});
 		setHeight(gManager.getX());
 		setWidth(gManager.getY());
+		if(gManager.isWinner()) {
+		//	new CTFGameWon(gManager);
+		//	gManager.gameOver();
+			
+		}
 	}
 
 	public void end() {

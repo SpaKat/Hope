@@ -9,7 +9,7 @@ public class Game {
 	private int maxTeams = 4;
 	private int pointsToWin = 1;
 	private boolean gameWon = false; 
-	private Team WinningTeam; 
+	private Team WinningTeam;  
 
 	public Game(Gameboard gameboard) {
 		this.gameboard = gameboard;

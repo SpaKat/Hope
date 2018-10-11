@@ -23,8 +23,8 @@ public class Bullet extends GameColorObject {
 		boolean done = false;
 		double moveX = getX() + ( speed * Math.cos(heading) );
 		double moveY = getY() + ( speed * Math.sin(heading) );
-		bulletLength -= (speed * Math.cos(heading));
-		bulletLength -= (speed * Math.sin(heading));
+		bulletLength -= Math.abs(speed * Math.cos(heading));
+		bulletLength -= Math.abs(speed * Math.sin(heading));
 		if (bulletLength <=0) {
 			done = true;
 		}else {

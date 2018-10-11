@@ -27,10 +27,10 @@ public class CTFPlayers extends Circle{
 	}
 
 	public void update() {
-		if (player.isDied()) {
-			setVisible(false);
-		}else {
+		if (player.isSpawned()) {
 			setVisible(true);
+		}else {
+			setVisible(false);
 		}
 		if(player.isSpawned()) {
 			setLayoutX(player.getX());

@@ -38,9 +38,9 @@ public class Client extends Thread {
 	}
 
 	private void nor() throws IOException {
-		out.writeObject(new StatsMessage(5, 5, 5, 1));
+		out.writeObject(new StatsMessage(5, 5, 5, 80));
 		out.reset();
-		out.writeObject(new Teamid(2));
+		out.writeObject(new Teamid(1));
 		out.reset();
 		double heading = Math.PI/2;
 		while (true) {
@@ -48,9 +48,7 @@ public class Client extends Thread {
 			//	System.out.println(heading);
 			out.writeObject(new Heading(heading));
 			out.reset();
-			out.writeObject(new Fire());
-			out.reset();
-			/*Scanner scan = new Scanner(System.in);
+			Scanner scan = new Scanner(System.in);
 			switch (scan.next()) {
 			case "w":
 				heading = Math.PI*3/2.0;
@@ -64,9 +62,12 @@ public class Client extends Thread {
 			case "d":
 				heading = Math.PI*2;
 				break;
-			default:
+			case "f":
+			out.writeObject(new Fire());
+			out.reset();
+				
 				break;
-			}*/
+			}
 			try{Thread.sleep(50);}catch(Exception d ) {}
 
 		}

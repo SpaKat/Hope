@@ -45,7 +45,10 @@ public class GameManager{
 	public void removePlayer(Player player) {
 		game.removePlayer(player);
 	}
-
+	
+	public void gameOver() {
+		
+	}
 	// ----------------------------------------- NEEDED FOR GUI ----------------------------------//
 	
 	public Game getGame() {
@@ -60,6 +63,10 @@ public class GameManager{
 	public double getY() {
 		return gameboard.getY();
 	}
+	public boolean isWinner() {
+		// TODO Auto-generated method stub
+		return game.checkForWin();
+	}
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
 /*
 	public GameInfo sendInfo() {
@@ -67,6 +74,10 @@ public class GameManager{
 		return gameInfo;
 	}
 */
+
+	
+
+	
 
 	
 
