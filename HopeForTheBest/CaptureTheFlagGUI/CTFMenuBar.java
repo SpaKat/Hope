@@ -26,8 +26,8 @@ public class CTFMenuBar extends MenuBar {
 			 server =new ServerCommunication(gManager);
 		});
 		
-		Server.getItems().add(startServer);
-		getMenus().add(Server);
+		Server.getItems().addAll(startServer);
+		getMenus().addAll(Server,new CTFGameControls(gManager));
 	}
 
 	private void testFuncations() {

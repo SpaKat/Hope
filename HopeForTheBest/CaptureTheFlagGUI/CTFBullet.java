@@ -2,7 +2,7 @@ package CaptureTheFlagGUI;
 
 import CaptureTheFlagGame.Bullet;
 import javafx.scene.shape.Circle;
-
+ 
 public class CTFBullet extends Circle{
 	private Bullet bullet;
 	private CTFGame ctfGame; 

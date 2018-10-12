@@ -2,7 +2,7 @@ package CaptureTheFlagGUI;
 
 import CaptureTheFlagGame.HomeBase;
 import javafx.scene.shape.Circle;
-
+   
 public class CTFHomeBase extends Circle {
 	private CTFGame ctfGame;
 	private HomeBase homeBase;

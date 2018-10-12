@@ -15,16 +15,16 @@ public class Game {
 		this.gameboard = gameboard;
 		teams = new ArrayList<>();
 		for (int i = 0; i < maxTeams; i++) {
-			teams.add(new Team(i));
+			teams.add(new Team(i,gameboard));
 		}
 		gameWon = false; 
 	}
 
 	public void spawn() {
 		teams.forEach(team ->{
-			team.spawnHomeBase(gameboard.getX(), gameboard.getY());
-			team.spawnFlags(gameboard.getX(), gameboard.getY());
-			team.spawnPlayers(gameboard.getX(), gameboard.getY());
+			team.spawnHomeBase();
+			team.spawnFlags();
+			team.spawnPlayers();
 		});
 	}
 
@@ -50,7 +50,7 @@ public class Game {
 				if(team != otherTeam) {
 					if(team.scorePoint(otherTeam)) {
 						team.addPoint();
-						otherTeam.resetFlag(gameboard.getX(), gameboard.getY());
+						otherTeam.resetFlag();
 					}
 				}
 			});
@@ -59,7 +59,7 @@ public class Game {
 
 	public void move() {
 		teams.forEach(team ->{
-			team.movePlayers(gameboard.getX(), gameboard.getY());
+			team.movePlayers();
 			team.moveFlag();
 		});
 		teams.forEach(team ->{

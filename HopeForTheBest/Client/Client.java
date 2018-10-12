@@ -3,6 +3,8 @@ package Client;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -24,7 +26,8 @@ public class Client extends Thread {
 	@Override
 	public void run() {
 		try {
-			socket = new Socket("127.0.0.1", 8008);
+			//System.out.println(InetAddress.getLocalHost().getHostAddress());
+			socket = new Socket(Inet4Address.getLocalHost().getHostAddress(), 8008);
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 			nor();
@@ -40,16 +43,16 @@ public class Client extends Thread {
 	private void nor() throws IOException {
 		out.writeObject(new StatsMessage(5, 5, 5,80));
 		out.flush();
-		out.writeObject(new Teamid(3));
+		out.writeObject(new Teamid((int) (Math.random()*4)));
 		out.flush();
 		try{Thread.sleep(50);}catch(Exception d ) {}
 		double heading = Math.PI/2;
 		while (true) {
 			//	heading += Math.PI*2 / 180;
 			//	System.out.println(heading);
-			out.writeObject(new Heading(heading+=Math.PI/250));
-			out.reset();
-			Scanner scan = new Scanner(System.in);
+			out.writeObject(new Heading(heading+=Math.PI/20));
+			out.reset();;
+			/*Scanner scan = new Scanner(System.in);
 			switch (scan.next()) {
 			case "w":
 				heading = Math.PI*3/2.0;
@@ -68,7 +71,7 @@ public class Client extends Thread {
 			out.reset();
 				
 				break;
-			}
+			}*/
 			try{Thread.sleep(50);}catch(Exception d ) {}
 		}
 	}

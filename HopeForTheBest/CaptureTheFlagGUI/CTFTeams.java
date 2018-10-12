@@ -6,13 +6,13 @@ import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Team;
 
 public class CTFTeams extends ArrayList<CTFPlayers>{
-
+ 
 	private Team team;
 	private CTFGame ctfGame;
 
 	private CTFFlag flag;
 	private CTFHomeBase homebase;
-
+ 
 
 	public CTFTeams(Team team, CTFGame ctfGame) {
 		this.team = team;

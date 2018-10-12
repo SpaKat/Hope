@@ -10,7 +10,7 @@ public class Flag extends GameColorObject{
 		setColor(color);
 		setRadius(7);
 	}
-	
+	 
 	public void gotTakenBy(Player player) {
 		this.player = player;
 	}

@@ -17,8 +17,10 @@ public class Team extends ArrayList<Player> {
 	private int id;
 	private double totalOffset =0;
 	private int points = 0;
-	public Team(int id) {
+	private Gameboard gameboard;
+	public Team(int id, Gameboard gameboard) {
 		this.id = id;
+		this.gameboard = gameboard;
 		Random rn = new Random();
 		color = rn.nextInt(0xFFFFFF+1) ;
 		flag = new Flag(color);
@@ -36,35 +38,39 @@ public class Team extends ArrayList<Player> {
 		return color;
 	}
 
-	public void spawnPlayers(double x, double y) {
+	public void spawnPlayers() {
 		for (int i = 0; i < size(); i++) {
 			Player player = get(i);
 			if (!player.isSpawned() && player.readyToSpawn()) {
 				Random rn = new Random();
-				switch (id) {
-				case 0:
-					player.setX(totalOffset + rn.nextInt((int) homeBase.getRadius()));
-					player.setY(totalOffset + rn.nextInt((int) homeBase.getRadius()));
-					break;
-				case 1:
-					player.setX(x - rn.nextInt((int) homeBase.getRadius()));
-					player.setY(y - rn.nextInt((int) homeBase.getRadius()));
-					break;
-				case 2:
-					player.setX(x - rn.nextInt((int) homeBase.getRadius()));
-					player.setY(totalOffset + rn.nextInt((int) homeBase.getRadius()));
-					break;
-				case 3:
-					player.setX(totalOffset + rn.nextInt((int) homeBase.getRadius()));
-					player.setY(y - rn.nextInt((int) homeBase.getRadius()));
-					break;
-				}
+				spawnAtHome( player, rn);
 				player.setSpawned(true);
 			}
 		}
 	}
 
-	protected void spawnHomeBase(double x, double y) {
+	private void spawnAtHome(Player player, Random rn) {
+		switch (id) {
+		case 0:
+			player.setX(totalOffset + rn.nextInt((int) homeBase.getRadius()));
+			player.setY(totalOffset + rn.nextInt((int) homeBase.getRadius()));
+			break;
+		case 1:
+			player.setX(gameboard.getX() - rn.nextInt((int) homeBase.getRadius()));
+			player.setY(gameboard.getY() - rn.nextInt((int) homeBase.getRadius()));
+			break;
+		case 2:
+			player.setX(gameboard.getX() - rn.nextInt((int) homeBase.getRadius()));
+			player.setY(totalOffset + rn.nextInt((int) homeBase.getRadius()));
+			break;
+		case 3:
+			player.setX(totalOffset + rn.nextInt((int) homeBase.getRadius()));
+			player.setY(gameboard.getY() - rn.nextInt((int) homeBase.getRadius()));
+			break;
+		}
+	}
+
+	protected void spawnHomeBase() {
 		if (!homeBase.isSpawned()) {
 			switch (id) {
 			case 0:
@@ -72,23 +78,23 @@ public class Team extends ArrayList<Player> {
 				homeBase.setY(totalOffset);
 				break;
 			case 1:
-				homeBase.setX(x - totalOffset);
-				homeBase.setY(y - totalOffset);
+				homeBase.setX(gameboard.getX() - totalOffset);
+				homeBase.setY(gameboard.getY() - totalOffset);
 				break;
 			case 2:
-				homeBase.setX(x - totalOffset);
+				homeBase.setX(gameboard.getX() - totalOffset);
 				homeBase.setY(totalOffset);
 				break;
 			case 3:
 				homeBase.setX(totalOffset);
-				homeBase.setY(y - totalOffset);
+				homeBase.setY(gameboard.getY() - totalOffset);
 				break;
 			}
 			homeBase.setSpawned(true);
 		}
 	}
 
-	protected void spawnFlags(double x, double y ) {
+	protected void spawnFlags() {
 		if (!flag.isSpawned()) {
 			double offset = homeBase.getRadius();
 			switch (id) {
@@ -97,16 +103,16 @@ public class Team extends ArrayList<Player> {
 				flag.setY(offset);
 				break;
 			case 1:
-				flag.setX(x - offset);
-				flag.setY(y - offset);
+				flag.setX(gameboard.getX() - offset);
+				flag.setY(gameboard.getY() - offset);
 				break;
 			case 2:
-				flag.setX(x - offset);
+				flag.setX(gameboard.getX() - offset);
 				flag.setY(offset);
 				break;
 			case 3:
 				flag.setX(offset);
-				flag.setY(y - offset);
+				flag.setY(gameboard.getY() - offset);
 				break;
 			}
 			flag.setSpawned(true);
@@ -115,7 +121,7 @@ public class Team extends ArrayList<Player> {
 
 
 
-	public void movePlayers(double maxX, double maxY) {
+	public void movePlayers() {
 		for (int i = 0; i <size(); i++) {
 			Player player = get(i);
 			double moveX = player.getX() + ( player.getMoveSpeed() * Math.cos(player.getHeading()) );
@@ -123,14 +129,14 @@ public class Team extends ArrayList<Player> {
 			if (moveX < 0  ) {
 				moveX = 0;
 			}
-			if (moveX > maxX) {
-				moveX = maxX;
+			if (moveX > gameboard.getX()) {
+				moveX = gameboard.getX();
 			}
 			if (moveY < 0) {
 				moveY = 0;
 			}
-			if (moveY > maxY) {
-				moveY = maxY;
+			if (moveY > gameboard.getY()) {
+				moveY = gameboard.getY();
 			}
 			player.setX(moveX);
 			player.setY(moveY);
@@ -183,9 +189,9 @@ public class Team extends ArrayList<Player> {
 	public void addPoint() {
 		points++;
 	}
-	public void resetFlag(double x, double y) {
+	public void resetFlag() {
 		flag.reset();
-		spawnFlags(x, y);
+		spawnFlags();
 	}
 	public int getPoints() {
 		return points;
@@ -197,10 +203,9 @@ public class Team extends ArrayList<Player> {
 	public void reset() {
 		for (int i = 0; i < size(); i++) {
 			Player player = get(i);
-			player.setX(homeBase.getX());
-			player.setY(homeBase.getY());
+			spawnAtHome(player, new Random());
 		}
 		points = 0;
-		spawnFlags(homeBase.getX(), homeBase.getY());
+		spawnFlags();
 	}
 }

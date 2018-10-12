@@ -13,7 +13,6 @@ public class CTFGame extends Pane {
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
-	private boolean GameOver = false;
 	public CTFGame(GameManager gManager) {
 		this.game = gManager.getGame();
 		this.gManager = gManager;
@@ -36,19 +35,10 @@ public class CTFGame extends Pane {
 		});
 		setHeight(gManager.getX());
 		setWidth(gManager.getY());
-		if(gManager.isWinner() && !GameOver) {
-			new CTFGameWon(gManager,this);
-			GameOver = true;
-		}
 	}
 
 	public void end() {
 		backgroundUpdate.end();
-	}
-
-	public void reset() {
-		GameOver = false;
-		setUpGame();
 	}
 
 

@@ -1,5 +1,6 @@
 package CaptureTheFlagGUI;
 
+
 import CaptureTheFlagGame.Flag;
 import javafx.scene.shape.Circle;
 
