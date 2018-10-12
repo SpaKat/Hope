@@ -38,15 +38,16 @@ public class Client extends Thread {
 	}
 
 	private void nor() throws IOException {
-		out.writeObject(new StatsMessage(5, 5, 5, 80));
-		out.reset();
-		out.writeObject(new Teamid(1));
-		out.reset();
+		out.writeObject(new StatsMessage(5, 5, 5,80));
+		out.flush();
+		out.writeObject(new Teamid(3));
+		out.flush();
+		try{Thread.sleep(50);}catch(Exception d ) {}
 		double heading = Math.PI/2;
 		while (true) {
 			//	heading += Math.PI*2 / 180;
 			//	System.out.println(heading);
-			out.writeObject(new Heading(heading));
+			out.writeObject(new Heading(heading+=Math.PI/250));
 			out.reset();
 			Scanner scan = new Scanner(System.in);
 			switch (scan.next()) {
@@ -69,7 +70,6 @@ public class Client extends Thread {
 				break;
 			}
 			try{Thread.sleep(50);}catch(Exception d ) {}
-
 		}
 	}
 
@@ -78,7 +78,10 @@ public class Client extends Thread {
 
 
 	public static void main(String[] args) {
-		new Client();
+		for (int i = 0; i < 1; i++) {
+			new Client();
+		}
+		
 	}
 
 }

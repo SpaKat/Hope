@@ -193,4 +193,14 @@ public class Team extends ArrayList<Player> {
 	public HomeBase getHomeBase() {
 		return homeBase;
 	}
+
+	public void reset() {
+		for (int i = 0; i < size(); i++) {
+			Player player = get(i);
+			player.setX(homeBase.getX());
+			player.setY(homeBase.getY());
+		}
+		points = 0;
+		spawnFlags(homeBase.getX(), homeBase.getY());
+	}
 }

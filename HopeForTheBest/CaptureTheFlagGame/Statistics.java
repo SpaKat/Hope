@@ -10,8 +10,8 @@ public class Statistics {
 	private double health;
 	private double movespeed;
 	private final double MAXRATING = 100;
-	private final double SCALE = 50;
-	
+	private final double SCALE = 25;
+
 	public Statistics(double attack,double defense,double health,double movespeed) {
 		this.attack = attack;
 		this.defense = defense;
@@ -44,5 +44,15 @@ public class Statistics {
 	}
 	public void take(double damage) {
 		health-= (damage - (defense/2)  );
+	}
+	public boolean sameStats(Statistics otherStats) {
+		boolean same = false;
+		if (attack == otherStats.getAttack() &&
+				defense == otherStats.getDefense() &&
+				health == otherStats.getHealth() &&
+				movespeed == otherStats.getMovespeed()) {
+			same = true;
+		}
+		return same;
 	}
 }

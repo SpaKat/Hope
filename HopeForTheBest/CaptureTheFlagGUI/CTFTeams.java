@@ -30,11 +30,21 @@ public class CTFTeams extends ArrayList<CTFPlayers>{
 		}
 		for (int i = 0; i < team.size(); i++) {
 			Player p = team.get(i);
-			try {
+			boolean addPlayer = true;
+			for (int j = 0; j < size(); j++) {
+				CTFPlayers CTFp = get(j);
+				if (CTFp.getPlayer().samePlayer(p)) {
+					addPlayer = false;
+				}
+			}
+			if(addPlayer) {
+				this.add(new CTFPlayers(p,ctfGame));
+			}
+			/*try {
 			CTFPlayers CTFp = get(i);
 			}catch (Exception e) {
 				this.add(new CTFPlayers(p,ctfGame));
-			}
+			}*/
 		}
 		//System.out.println("size " +team.size());
 	}

@@ -97,13 +97,17 @@ public class Game {
 		});
 	}
 
-	public void addPlayer(Player player, int teamID) {
-		teams.forEach(team ->{
+	public boolean addPlayer(Player player, int teamID) {
+		boolean added = false;
+		for (int i = 0; i < teams.size(); i++) {
+			Team team = teams.get(i);
 			if (team.getId() == teamID && team.getMaxPlayers() >= team.size()) {
 				team.add(player);
 				player.setColor(team.getColor());
+				added = true;
 			}
-		});
+		}
+		return added;
 	}
 	public Team getWinningTeam() {
 		return WinningTeam;
@@ -120,4 +124,14 @@ public class Game {
 			}
 		});
 	}
+
+	public void reset() {
+		teams.forEach(team->{
+			team.reset();
+		});
+		WinningTeam = null;
+		gameWon = false;
+	}
+
+
 }

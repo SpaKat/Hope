@@ -13,17 +13,21 @@ public class CTFGame extends Pane {
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
-	
+	private boolean GameOver = false;
 	public CTFGame(GameManager gManager) {
 		this.game = gManager.getGame();
 		this.gManager = gManager;
+		setUpGame();
+		backgroundUpdate = new CTFGameUpdate(this);
+		setStyle("-fx-background-color: black");
+		toBack();
+	}
+
+	private void setUpGame() {
 		teams = new ArrayList<CTFTeams>();
 		game.getTeams().forEach(team ->{
 			teams.add(new CTFTeams(team,this));
 		});
-		backgroundUpdate = new CTFGameUpdate(this);
-		setStyle("-fx-background-color: black");
-		toBack();
 	}
 
 	public void update() {
@@ -32,15 +36,19 @@ public class CTFGame extends Pane {
 		});
 		setHeight(gManager.getX());
 		setWidth(gManager.getY());
-		if(gManager.isWinner()) {
-		//	new CTFGameWon(gManager);
-		//	gManager.gameOver();
-			
+		if(gManager.isWinner() && !GameOver) {
+			new CTFGameWon(gManager,this);
+			GameOver = true;
 		}
 	}
 
 	public void end() {
 		backgroundUpdate.end();
+	}
+
+	public void reset() {
+		GameOver = false;
+		setUpGame();
 	}
 
 

@@ -98,4 +98,17 @@ public class Player extends GameColorObject{
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	public boolean samePlayer(Player otherPLayer) {
+		boolean same = false;
+		if (stats.sameStats(otherPLayer.getStats())) {
+			if(getColor() == otherPLayer.getColor() &&
+					getX() == otherPLayer.getX() &&
+					getY() == otherPLayer.getY() &&
+					getHeading() == otherPLayer.getHeading()
+					) {
+				same = true;
+			}
+		}
+		return same;
+	}
 }

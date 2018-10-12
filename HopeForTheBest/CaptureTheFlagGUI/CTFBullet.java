@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 
 public class CTFBullet extends Circle{
 	private Bullet bullet;
-	private CTFGame ctfGame;
+	private CTFGame ctfGame; 
 	
 	public CTFBullet(Bullet bullet, CTFGame ctfGame) {
 		this.bullet = bullet;

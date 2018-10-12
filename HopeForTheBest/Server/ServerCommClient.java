@@ -26,7 +26,7 @@ public class ServerCommClient extends Thread {
 	public ServerCommClient(GameManager gManager,Socket socket) {
 		this.gManager = gManager;
 		this.socket = socket;
-		//setName("SERVER Client");
+		setName("SERVER Client");
 		this.start();
 	}
 
@@ -56,7 +56,9 @@ public class ServerCommClient extends Thread {
 						break;
 					case "Teamid":
 						if (changeStats <=0 && changeTeam-- > 0 ) {
-							gManager.addPlayer(player, ((Teamid )message).getId());
+							if(!gManager.addPlayer(player, ((Teamid )message).getId())) {
+								socket.close();
+							}
 						}
 						break;
 					case "Heading":

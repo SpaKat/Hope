@@ -57,5 +57,7 @@ public class CTFPlayers extends Circle{
 		}
 		//System.out.println("CTFPlayers: " + player.getX() + "    " + player.getY());
 	}
-
+	public Player getPlayer() {
+		return player;
+	}
 }

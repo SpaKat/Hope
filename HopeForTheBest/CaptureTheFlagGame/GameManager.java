@@ -6,27 +6,28 @@ public class GameManager{
 
 	private Gameboard gameboard;
 	private Game game;
-
+	
 	public GameManager(double x,double y) {
 		gameboard = new Gameboard(x, y);
 		game = new Game(gameboard);
 	}
 
-	public boolean OneTurn() {
-		//spawn
-		game.spawn();
-		// check for kill & kill
-		game.checkForKill();
-		//check for point
-		game.checkForPoint();
-		// move
-		game.move();
-		// respawn
-		game.respawn();
+	public void OneTurn() {
 		// check for win
-		return game.checkForWin();
+		if(!game.checkForWin()) {
+			//spawn
+			game.spawn();
+			// check for kill & kill
+			game.checkForKill();
+			//check for point
+			game.checkForPoint();
+			// move
+			game.move();
+			// respawn
+			game.respawn();
+		}
 	}
-	
+
 	public void setheight(double newHieght) {
 		gameboard.setY(newHieght);
 	}
@@ -34,10 +35,10 @@ public class GameManager{
 		gameboard.setX(newWidth);
 	}
 
-	public void addPlayer(Player player, int teamID) {
-		game.addPlayer(player,teamID);
+	public boolean addPlayer(Player player, int teamID) {
+		return game.addPlayer(player,teamID);
 	}
-	
+
 	public Team getWinningTeam() {
 		return game.getWinningTeam();
 	}
@@ -45,12 +46,8 @@ public class GameManager{
 	public void removePlayer(Player player) {
 		game.removePlayer(player);
 	}
-	
-	public void gameOver() {
-		
-	}
 	// ----------------------------------------- NEEDED FOR GUI ----------------------------------//
-	
+
 	public Game getGame() {
 		return game;
 	}
@@ -64,25 +61,17 @@ public class GameManager{
 		return gameboard.getY();
 	}
 	public boolean isWinner() {
-		// TODO Auto-generated method stub
 		return game.checkForWin();
 	}
+	public void reset() {
+		game.reset();
+	}
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
-/*
+	/*
 	public GameInfo sendInfo() {
 		GameInfo gameInfo = new GameInfo(game.getTeams(),game.getGameboard()); 
 		return gameInfo;
 	}
-*/
-
-	
-
-	
-
-	
-
-
-
-
+	 */
 
 }
