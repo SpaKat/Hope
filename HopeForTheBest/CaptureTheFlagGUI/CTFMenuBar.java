@@ -12,22 +12,30 @@ public class CTFMenuBar extends MenuBar {
 
 	private GameManager gManager;
 	private ServerCommunication server;
-
-	public CTFMenuBar(GameManager gManager) {
+	private GameManagerGUI gameManagerGUI;
+	public CTFMenuBar(GameManager gManager, GameManagerGUI gameManagerGUI) {
 		this.gManager = gManager;
 		toFront();
 
 		//testFuncations();
 		Menu Server = new Menu("Server");
-		
 		MenuItem startServer = new MenuItem("Start Server");
-		
 		startServer.setOnAction(e->{
 			 server =new ServerCommunication(gManager);
 		});
-		
-		Server.getItems().addAll(startServer);
-		getMenus().addAll(Server,new CTFGameControls(gManager));
+		MenuItem host = new MenuItem("Host Mode");
+		host.setOnAction(e ->{
+			gameManagerGUI.hostMode();
+		});
+		Server.getItems().addAll(startServer,host);
+	
+		Menu Client = new Menu("Client");
+		MenuItem client = new MenuItem("Client Mode");
+		client.setOnAction(e->{
+			gameManagerGUI.clientMode();
+		});
+		Client.getItems().addAll(client);
+		getMenus().addAll(Server,Client,new CTFGameControls(gManager));
 	}
 
 	private void testFuncations() {

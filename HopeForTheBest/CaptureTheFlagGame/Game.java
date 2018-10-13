@@ -133,5 +133,13 @@ public class Game {
 		gameWon = false;
 	}
 
+	public void resetForSize() {
+		teams.forEach(team->{
+			team.resetForSize();
+		});
+	}
 
+	public Gameboard getGameboard() {
+		return gameboard;
+	}
 }

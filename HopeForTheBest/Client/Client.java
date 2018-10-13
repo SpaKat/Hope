@@ -1,90 +1,105 @@
 package Client;
-
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Scanner;
 
-import Message.Fire;
-import Message.Heading;
-import Message.StatsMessage;
-import Message.Teamid;
+import CaptureTheFlagGame.Flag;
+import CaptureTheFlagGame.GameManager;
+import CaptureTheFlagGame.Player;
+import CaptureTheFlagGame.Statistics;
+import CaptureTheFlagGame.Team;
+import Message.GameInfo;
+import Message.PlayerInfo;
+import Message.ReQuestGameInfo;
 
 public class Client extends Thread {
-
 
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	public Client() {
+	private int port;
+	private String ip;
+	private boolean running =true;
+	private GameInfo gameInfo; 
+	private GameManager gameManager;
+	public Client(String ip,int port) {
+		this.ip = ip;
+		this.port = port;
 		start();
+	}
+
+	public Client(GameManager gameManager, String text, int parseInt) {
+		this(text, parseInt);
+		this.gameManager = gameManager;
 	}
 
 	@Override
 	public void run() {
 		try {
-			//System.out.println(InetAddress.getLocalHost().getHostAddress());
-			socket = new Socket(Inet4Address.getLocalHost().getHostAddress(), 8008);
+			socket = new Socket(ip, port);
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
-			nor();
+			while (running) {
+				read();
+				try{Thread.sleep(1);}catch(Exception d ) {}
+			}
 		}catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			//System.out.println("WHAT!?!?!?!");
-		}
-		//while(true)				try{Thread.sleep(1);}catch (Exception e) {}
-
-	}
-
-	private void nor() throws IOException {
-		out.writeObject(new StatsMessage(5, 5, 5,80));
-		out.flush();
-		out.writeObject(new Teamid((int) (Math.random()*4)));
-		out.flush();
-		try{Thread.sleep(50);}catch(Exception d ) {}
-		double heading = Math.PI/2;
-		while (true) {
-			//	heading += Math.PI*2 / 180;
-			//	System.out.println(heading);
-			out.writeObject(new Heading(heading+=Math.PI/20));
-			out.reset();;
-			/*Scanner scan = new Scanner(System.in);
-			switch (scan.next()) {
-			case "w":
-				heading = Math.PI*3/2.0;
-				break;
-			case "a":
-				heading = Math.PI;
-				break;
-			case "s":
-				heading = Math.PI/2.0;
-				break;
-			case "d":
-				heading = Math.PI*2;
-				break;
-			case "f":
-			out.writeObject(new Fire());
-			out.reset();
-				
-				break;
-			}*/
-			try{Thread.sleep(50);}catch(Exception d ) {}
+			//e.printStackTrace();
 		}
 	}
-
-
-
-
-
-	public static void main(String[] args) {
-		for (int i = 0; i < 1; i++) {
-			new Client();
+	
+	private void read() throws Exception{
+		Object o = in.readObject();
+		switch (o.getClass().getSimpleName()) {
+		case "GameInfo":
+			gameInfo = (GameInfo) o;
+			//updateGameManger();
+			break;
+		default:
+			break;
 		}
+	}
+	/*private void updateGameManger() {
 		
-	}
+		gameManager.setheight(gameInfo.getGameboard().getY());
+		gameManager.setwidth(gameInfo.getGameboard().getX());
+		
+		gameInfo.getTeam().forEach(teamInfo ->{
+			Team team = gameManager.getGame().getTeams().get(teamInfo.getId());
+			
+			team.getFlag().setRadius(teamInfo.getFlag().getRadius());
+			team.getFlag().setX(teamInfo.getFlag().getX());
+			team.getFlag().setY(teamInfo.getFlag().getY());
+			team.getFlag().setColor(teamInfo.getFlag().getColor());
+			
+			team.getHomeBase().setColor(teamInfo.getHomeBase().getColor());
+			team.getHomeBase().setRadius(teamInfo.getHomeBase().getRadius());
+			team.getHomeBase().setX(teamInfo.getHomeBase().getX());
+			team.getHomeBase().setY(teamInfo.getHomeBase().getY());
+			
+			teamInfo.forEach(playerInfo ->{
+				Statistics stats = new Statistics(playerInfo.getStats().getAttack(),
+						playerInfo.getStats().getDefense(), 
+						playerInfo.getStats().getHealth(),
+						playerInfo.getStats().getMovespeed());
+				stats.setHealth(playerInfo.getStats().getHealth());
+				stats.setMaxHealth(playerInfo.getStats().getMaxHealth());
+				Player player = new Player(stats);
+				player.setColor(playerInfo.getColor());
+				player.setHeading(playerInfo.get);
+				if (!team.contains(player)) {
+					
+				}
+			});
+			
+		});
+	}*/
 
+	public GameInfo getGameInfo() {
+		return gameInfo;
+	}
+	public void end() {
+		running = false;
+	}
 }

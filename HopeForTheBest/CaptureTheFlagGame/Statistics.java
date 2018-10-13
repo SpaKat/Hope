@@ -27,6 +27,9 @@ public class Statistics {
 		}
 		return b;
 	}
+	public double getMaxHealth() {
+		return maxHealth;
+	}
 	public double getAttack() {
 		return attack;
 	}
@@ -41,6 +44,12 @@ public class Statistics {
 	}
 	public void resetHealth() {
 		health = maxHealth;
+	}
+	public void setHealth(double health) {
+		this.health = health;
+	}
+	public void setMaxHealth(double maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 	public void take(double damage) {
 		health-= (damage - (defense/2)  );

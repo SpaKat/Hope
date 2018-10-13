@@ -22,7 +22,7 @@ public class CTFGameUpdate extends Thread {
 				}
 			});
 			try {
-				Thread.sleep(0, 1);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

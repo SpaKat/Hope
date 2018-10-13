@@ -10,6 +10,7 @@ import java.net.SocketException;
 import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
+import Message.GameInfo;
 import Message.Heading;
 import Message.StatsMessage;
 import Message.Teamid;
@@ -51,7 +52,12 @@ public class ServerCommClient extends Thread {
 									((StatsMessage) message).getDefense(), 
 									((StatsMessage) message).getHealth(), 
 									((StatsMessage) message).getMovespeed());
-							player = new Player(stats);
+							if (stats.getRateing()) {
+								player = new Player(stats);
+							}else {
+								socket.close();
+							}
+							
 						}
 						break;
 					case "Teamid":
@@ -69,6 +75,10 @@ public class ServerCommClient extends Thread {
 					case "Fire":
 						player.fireBullet();
 						//System.out.println("fire");
+					case "ReQuestGameInfo":
+						out.writeObject(new GameInfo(gManager.getGame()));
+						out.flush();
+						//System.out.println("Asdasdasdasd");
 					default:
 						break;
 					}
@@ -87,7 +97,7 @@ public class ServerCommClient extends Thread {
 		try {
 			player.setDisconnect(true);
 		}catch (Exception e) {
-			e.printStackTrace();	
+			//e.printStackTrace();	
 		}
 
 	}

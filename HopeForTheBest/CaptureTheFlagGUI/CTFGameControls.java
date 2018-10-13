@@ -14,10 +14,6 @@ public class CTFGameControls extends Menu{
 		this.gManager = gManager;
 		setText("Controls");
 		addQuickButtons();
-		
-
-
-	
 	}
 
 

@@ -13,13 +13,26 @@ public class CTFGame extends Pane {
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
+		
 	public CTFGame(GameManager gManager) {
 		this.game = gManager.getGame();
 		this.gManager = gManager;
 		setUpGame();
+		toBack();
 		backgroundUpdate = new CTFGameUpdate(this);
 		setStyle("-fx-background-color: black");
-		toBack();
+		linkSizeToManager(gManager);
+	}
+
+	private void linkSizeToManager(GameManager gManager) {
+		heightProperty().addListener((arg, oldV, newV) ->{
+			gManager.setheight(newV.doubleValue());
+			gManager.updateSize();
+		});
+		widthProperty().addListener((arg, oldV, newV) ->{
+			gManager.setwidth(newV.doubleValue());
+			gManager.updateSize();
+		});
 	}
 
 	private void setUpGame() {
@@ -33,8 +46,6 @@ public class CTFGame extends Pane {
 		teams.forEach(team ->{
 			team.update();
 		});
-		setHeight(gManager.getX());
-		setWidth(gManager.getY());
 	}
 
 	public void end() {

@@ -66,6 +66,9 @@ public class GameManager{
 	public void reset() {
 		game.reset();
 	}
+	public void updateSize() {
+		game.resetForSize();
+	}
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
 	/*
 	public GameInfo sendInfo() {
@@ -73,5 +76,7 @@ public class GameManager{
 		return gameInfo;
 	}
 	 */
+
+	
 
 }

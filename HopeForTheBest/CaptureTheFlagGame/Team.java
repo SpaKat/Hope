@@ -146,7 +146,7 @@ public class Team extends ArrayList<Player> {
 
 	public void moveFlag() {
 		flag.move();
-	//	System.out.println("Team.java  Flag x: " + flag.getX() + "   y: "+ flag.getY());
+		//	System.out.println("Team.java  Flag x: " + flag.getX() + "   y: "+ flag.getY());
 	}
 
 	public boolean takenFlag() {
@@ -207,5 +207,28 @@ public class Team extends ArrayList<Player> {
 		}
 		points = 0;
 		spawnFlags();
+	}
+
+	public void resetForSize() {
+		homeBase.setSpawned(false);
+		spawnHomeBase();
+		flag.setSpawned(false);
+		spawnFlags();
+
+	}
+	@Override
+	public boolean contains(Object o) {
+		boolean itdoes = false;
+		try{
+			for (int i = 0; i < size(); i++) {
+
+				if (get(i).samePlayer((Player) o)) {
+					itdoes = true;
+				}
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return itdoes;
 	}
 }

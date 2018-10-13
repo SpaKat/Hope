@@ -2,28 +2,44 @@ package CaptureTheFlagGUI;
 
 import CaptureTheFlagGame.GameManager;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 public class GameManagerGUI extends BorderPane {
 
 	private GameManager gManager;
 	private CTFGame ctfGame;
 	private CTFMenuBar CTFmenu;
+	private CTFStartClient CTFclient;
 	public GameManagerGUI() {
 		double x = 500; 
 		double y = 500;
 		gManager = new GameManager(x, y);
-		CTFmenu = new CTFMenuBar(gManager);
-		
-		
+		CTFmenu = new CTFMenuBar(gManager,this);
+		CTFclient = new CTFStartClient(this);
+
 		ctfGame = new CTFGame(gManager);
 		setCenter(ctfGame);
 		setTop(CTFmenu);
 	}
 
 	public void end() {
-		ctfGame.end();	
-		CTFmenu.end();
+		try {
+			ctfGame.end();	
+			CTFmenu.end();
+			CTFclient.end();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void hostMode() {
+		setCenter(ctfGame);
+		setTop(CTFmenu);
+	}
+	public void setCtfGame(CTFGame ctfGame) {
+		this.ctfGame = ctfGame;
+	}
+	public void clientMode() {
+		setCenter(CTFclient);
 	}	
 
 

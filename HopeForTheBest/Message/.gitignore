@@ -6,3 +6,16 @@
 /heading.class
 /Heading.class
 /Fire.class
+/GameInfo.class
+/TeamInfo.class
+/AllTeamInfo.class
+/ReQuestGameInfo.class
+/GameboardInfo.class
+/FlagInfo.class
+/HomeBaseInfo.class
+/ObjectInfo.class
+/ColorObjectInfo.class
+/PlayersInfo.class
+/PlayerInfo.class
+/BulletInfo.class
+/StatsInfo.class
