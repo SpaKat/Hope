@@ -2,6 +2,10 @@ package CaptureTheFlagGame;
 
 public class Flag extends GameColorObject{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3068979050080026308L;
 	private boolean taken;
 	private Player player;
 	public Flag(int color) {
@@ -20,17 +24,18 @@ public class Flag extends GameColorObject{
 	public boolean isTaken() {
 		return taken;
 	}
-	public void setTaken(boolean taken) {
-		this.taken = taken;
-	}
 	public void move() {
 		if (player != null) {
-			if (player.isDied()) {
+			if (player.isDied() || player.isDisconnect()) {
 				player = null;
+				taken = false;
 			}else {
 				setX(player.getX());
 				setY(player.getY());
+				taken = true;
 			}
+		}else {
+			taken = false;
 		}
 
 	}

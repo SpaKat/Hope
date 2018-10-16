@@ -14,8 +14,7 @@ public class GameManagerGUI extends BorderPane {
 		double y = 500;
 		gManager = new GameManager(x, y);
 		CTFmenu = new CTFMenuBar(gManager,this);
-		CTFclient = new CTFStartClient(this);
-
+		CTFclient = new CTFStartClient();
 		ctfGame = new CTFGame(gManager);
 		setCenter(ctfGame);
 		setTop(CTFmenu);
@@ -30,16 +29,13 @@ public class GameManagerGUI extends BorderPane {
 			// TODO: handle exception
 		}
 	}
+	public void clientMode() {
+		setCenter(CTFclient);
+	}
 
 	public void hostMode() {
 		setCenter(ctfGame);
 		setTop(CTFmenu);
-	}
-	public void setCtfGame(CTFGame ctfGame) {
-		this.ctfGame = ctfGame;
-	}
-	public void clientMode() {
-		setCenter(CTFclient);
 	}	
 
 

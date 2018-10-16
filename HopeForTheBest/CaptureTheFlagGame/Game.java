@@ -1,12 +1,17 @@
 package CaptureTheFlagGame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Game {
+public class Game implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1330880928306231504L;
 	private Gameboard gameboard;
 	private ArrayList<Team> teams;
-	private int maxTeams = 4;
+	private int maxTeams = 2;
 	private int pointsToWin = 1;
 	private boolean gameWon = false; 
 	private Team WinningTeam;  

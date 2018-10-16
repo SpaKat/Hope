@@ -21,7 +21,7 @@ public class CTFGame extends Pane {
 		toBack();
 		backgroundUpdate = new CTFGameUpdate(this);
 		setStyle("-fx-background-color: black");
-		linkSizeToManager(gManager);
+		linkSizeToManager(this.gManager);
 	}
 
 	private void linkSizeToManager(GameManager gManager) {

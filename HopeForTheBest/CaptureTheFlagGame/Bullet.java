@@ -2,6 +2,10 @@ package CaptureTheFlagGame;
 
 public class Bullet extends GameColorObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4636024992484246879L;
 	private double speed;
 	private double heading;
 	private double bulletLength = 125;

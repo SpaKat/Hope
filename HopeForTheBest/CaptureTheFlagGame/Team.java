@@ -1,9 +1,10 @@
 package CaptureTheFlagGame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Team extends ArrayList<Player> {
+public class Team extends ArrayList<Player> implements Serializable {
 
 
 	/**
@@ -187,6 +188,7 @@ public class Team extends ArrayList<Player> {
 	}
 
 	public void addPoint() {
+		System.out.println("got a point");
 		points++;
 	}
 	public void resetFlag() {
@@ -216,8 +218,8 @@ public class Team extends ArrayList<Player> {
 		spawnFlags();
 
 	}
-	@Override
-	public boolean contains(Object o) {
+
+	public boolean has(Object o) {
 		boolean itdoes = false;
 		try{
 			for (int i = 0; i < size(); i++) {

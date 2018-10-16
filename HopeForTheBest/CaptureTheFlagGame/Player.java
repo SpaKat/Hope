@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Player extends GameColorObject{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2761959824208880908L;
 	private double heading = 0; // tan2
 	private Statistics stats; //Customized
 	private ArrayList<Bullet> bullets = new ArrayList<>();

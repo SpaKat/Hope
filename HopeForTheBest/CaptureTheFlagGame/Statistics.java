@@ -1,9 +1,13 @@
 package CaptureTheFlagGame;
 
+import java.io.Serializable;
 
+public class Statistics implements Serializable{
 
-public class Statistics {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -990422555623864737L;
 	private double maxHealth;
 	private double attack;
 	private double defense;
@@ -63,5 +67,14 @@ public class Statistics {
 			same = true;
 		}
 		return same;
+	}
+	public void setAttack(double attack) {
+		this.attack = attack;
+	}
+	public void setDefense(double defense) {
+		this.defense = defense;
+	}
+	public void setMovespeed(double movespeed) {
+		this.movespeed = movespeed;
 	}
 }

@@ -1,9 +1,13 @@
 package CaptureTheFlagGame;
 
+import java.io.Serializable;
 
+public class GameManager implements Serializable{
 
-public class GameManager{
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4587919392088390480L;
 	private Gameboard gameboard;
 	private Game game;
 	

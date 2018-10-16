@@ -77,7 +77,7 @@ public class ServerCommClient extends Thread {
 						//System.out.println("fire");
 					case "ReQuestGameInfo":
 						out.writeObject(new GameInfo(gManager.getGame()));
-						out.flush();
+						out.reset();
 						//System.out.println("Asdasdasdasd");
 					default:
 						break;
@@ -86,6 +86,7 @@ public class ServerCommClient extends Thread {
 				//	System.out.println(player.getX() + "___________" + player.getY());
 				} catch (SocketException e) {
 					running = false;
+					
 				}
 				try {Thread.sleep(1);} catch (InterruptedException e) {	}	
 			}

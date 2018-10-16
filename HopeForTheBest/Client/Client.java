@@ -1,4 +1,5 @@
 package Client;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Inet4Address;
@@ -9,9 +10,13 @@ import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
 import CaptureTheFlagGame.Team;
+import Message.Fire;
 import Message.GameInfo;
+import Message.Heading;
 import Message.PlayerInfo;
 import Message.ReQuestGameInfo;
+import Message.StatsMessage;
+import Message.Teamid;
 
 public class Client extends Thread {
 
@@ -22,16 +27,12 @@ public class Client extends Thread {
 	private String ip;
 	private boolean running =true;
 	private GameInfo gameInfo; 
-	private GameManager gameManager;
+
 	public Client(String ip,int port) {
 		this.ip = ip;
 		this.port = port;
+		setName("Client");
 		start();
-	}
-
-	public Client(GameManager gameManager, String text, int parseInt) {
-		this(text, parseInt);
-		this.gameManager = gameManager;
 	}
 
 	@Override
@@ -41,6 +42,7 @@ public class Client extends Thread {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 			while (running) {
+				write();
 				read();
 				try{Thread.sleep(1);}catch(Exception d ) {}
 			}
@@ -48,58 +50,60 @@ public class Client extends Thread {
 			//e.printStackTrace();
 		}
 	}
-	
-	private void read() throws Exception{
-		Object o = in.readObject();
-		switch (o.getClass().getSimpleName()) {
-		case "GameInfo":
-			gameInfo = (GameInfo) o;
-			//updateGameManger();
-			break;
-		default:
-			break;
+
+	private void write() throws Exception{
+		out.writeObject(new ReQuestGameInfo());
+		out.reset();
+	}
+
+	private void read(){
+		try {
+			Object o = in.readObject();
+			switch (o.getClass().getSimpleName()) {
+			case "GameInfo":
+				gameInfo = (GameInfo) o;
+				break;
+			default:
+				System.out.println(o.getClass().getSimpleName());
+				break;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
-	/*private void updateGameManger() {
-		
-		gameManager.setheight(gameInfo.getGameboard().getY());
-		gameManager.setwidth(gameInfo.getGameboard().getX());
-		
-		gameInfo.getTeam().forEach(teamInfo ->{
-			Team team = gameManager.getGame().getTeams().get(teamInfo.getId());
-			
-			team.getFlag().setRadius(teamInfo.getFlag().getRadius());
-			team.getFlag().setX(teamInfo.getFlag().getX());
-			team.getFlag().setY(teamInfo.getFlag().getY());
-			team.getFlag().setColor(teamInfo.getFlag().getColor());
-			
-			team.getHomeBase().setColor(teamInfo.getHomeBase().getColor());
-			team.getHomeBase().setRadius(teamInfo.getHomeBase().getRadius());
-			team.getHomeBase().setX(teamInfo.getHomeBase().getX());
-			team.getHomeBase().setY(teamInfo.getHomeBase().getY());
-			
-			teamInfo.forEach(playerInfo ->{
-				Statistics stats = new Statistics(playerInfo.getStats().getAttack(),
-						playerInfo.getStats().getDefense(), 
-						playerInfo.getStats().getHealth(),
-						playerInfo.getStats().getMovespeed());
-				stats.setHealth(playerInfo.getStats().getHealth());
-				stats.setMaxHealth(playerInfo.getStats().getMaxHealth());
-				Player player = new Player(stats);
-				player.setColor(playerInfo.getColor());
-				player.setHeading(playerInfo.get);
-				if (!team.contains(player)) {
-					
-				}
-			});
-			
-		});
-	}*/
+	
 
 	public GameInfo getGameInfo() {
 		return gameInfo;
 	}
 	public void end() {
 		running = false;
+	}
+	public void setUpPlayer(Statistics stats, int teamId) throws Exception {
+		out.writeObject(new StatsMessage(stats.getAttack(), stats.getDefense(), stats.getHealth(), stats.getMovespeed()));
+		out.reset();
+		out.writeObject(new Teamid(teamId));
+		out.reset();
+		Thread.sleep(200);
+	}
+	public void sendHeading(double heading) {
+		try {
+			out.writeObject(new Heading(heading));
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+	public void fire() {
+		try {
+			out.writeObject(new Fire());
+			out.reset();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
