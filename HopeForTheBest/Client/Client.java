@@ -42,8 +42,8 @@ public class Client extends Thread {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
 			while (running) {
-				write();
-				read();
+				//write();
+				//read();
 				try{Thread.sleep(1);}catch(Exception d ) {}
 			}
 		}catch (Exception e) {
@@ -53,7 +53,7 @@ public class Client extends Thread {
 
 	private void write() throws Exception{
 		out.writeObject(new ReQuestGameInfo());
-		out.reset();
+		out.flush();
 	}
 
 	private void read(){
@@ -81,9 +81,9 @@ public class Client extends Thread {
 	}
 	public void setUpPlayer(Statistics stats, int teamId) throws Exception {
 		out.writeObject(new StatsMessage(stats.getAttack(), stats.getDefense(), stats.getHealth(), stats.getMovespeed()));
-		out.reset();
+		out.flush();
 		out.writeObject(new Teamid(teamId));
-		out.reset();
+		out.flush();
 		Thread.sleep(200);
 	}
 	public void sendHeading(double heading) {
@@ -100,7 +100,7 @@ public class Client extends Thread {
 	public void fire() {
 		try {
 			out.writeObject(new Fire());
-			out.reset();
+			out.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

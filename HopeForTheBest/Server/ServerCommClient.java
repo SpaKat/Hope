@@ -77,7 +77,7 @@ public class ServerCommClient extends Thread {
 						//System.out.println("fire");
 					case "ReQuestGameInfo":
 						out.writeObject(new GameInfo(gManager.getGame()));
-						out.reset();
+						out.flush();
 						//System.out.println("Asdasdasdasd");
 					default:
 						break;
