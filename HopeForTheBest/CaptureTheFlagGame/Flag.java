@@ -26,7 +26,7 @@ public class Flag extends GameColorObject{
 	}
 	public void move() {
 		if (player != null) {
-			if (player.isDied() || player.isDisconnect()) {
+			if (player.isDied() || player.isDisconnect() || !player.isSpawned()) {
 				player = null;
 				taken = false;
 			}else {
@@ -37,7 +37,7 @@ public class Flag extends GameColorObject{
 		}else {
 			taken = false;
 		}
-
+		
 	}
 
 	public void reset() {

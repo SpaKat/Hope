@@ -21,12 +21,12 @@ public class GameManager implements Serializable{
 		if(!game.checkForWin()) {
 			//spawn
 			game.spawn();
+			// move
+			game.move();
 			// check for kill & kill
 			game.checkForKill();
 			//check for point
 			game.checkForPoint();
-			// move
-			game.move();
 			// respawn
 			game.respawn();
 		}

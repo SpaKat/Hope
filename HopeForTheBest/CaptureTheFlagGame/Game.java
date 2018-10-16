@@ -52,7 +52,7 @@ public class Game implements Serializable{
 	public void checkForPoint() {
 		teams.forEach(team ->{
 			teams.forEach(otherTeam ->{
-				if(team != otherTeam) {
+				if(team.getId() != otherTeam.getId()) {
 					if(team.scorePoint(otherTeam)) {
 						team.addPoint();
 						otherTeam.resetFlag();

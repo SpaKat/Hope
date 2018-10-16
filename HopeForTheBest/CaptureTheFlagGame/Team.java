@@ -177,7 +177,8 @@ public class Team extends ArrayList<Player> implements Serializable {
 		double deltaY = Math.abs(player.getY() - homeBase.getY());
 		double range = homeBase.getRadius();
 		boolean b = false;
-		if (deltaX < range && deltaY < range) {
+		System.err.println(deltaX+"\t"+deltaY+"\t"+player.isDied()+"\t"+player.isSpawned());
+		if (deltaX < range && deltaY < range && !player.isDied() && player.isSpawned()) {
 			b = true;
 		}
 		return b;
