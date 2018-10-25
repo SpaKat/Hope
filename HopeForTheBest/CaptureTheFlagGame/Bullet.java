@@ -34,14 +34,14 @@ public class Bullet extends GameColorObject {
 		}else {
 			setX(moveX);
 			setY(moveY);
-		}
-	//	System.out.println("Bullet.java  x: " + getX() + "  y: " + getY() + "   Bullet length: "  + bulletLength);
-		
+		}		
 		return done;
 	}
+	
 	public double getDamage() {
 		return damage;
 	}
+	
 	public boolean done() {
 		boolean b = false;
 		if (bulletLength <= 0) {

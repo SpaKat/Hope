@@ -7,6 +7,10 @@ import CaptureTheFlagGame.Team;
 
 public class CTFTeams extends ArrayList<CTFPlayers>{
  
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5963502336512454678L;
 	private Team team;
 	private CTFGame ctfGame;
 
@@ -40,12 +44,6 @@ public class CTFTeams extends ArrayList<CTFPlayers>{
 			if(addPlayer) {
 				this.add(new CTFPlayers(p,ctfGame));
 			}
-			/*try {
-			CTFPlayers CTFp = get(i);
-			}catch (Exception e) {
-				this.add(new CTFPlayers(p,ctfGame));
-			}*/
 		}
-		//System.out.println("size " +team.size());
 	}
 }

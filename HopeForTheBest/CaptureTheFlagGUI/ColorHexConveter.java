@@ -1,10 +1,9 @@
 package CaptureTheFlagGUI;
 
 public class ColorHexConveter {
-
-
+	
 	private int hex;
-
+	
 	public ColorHexConveter(int hex) {
 		this.hex = hex;
 	}

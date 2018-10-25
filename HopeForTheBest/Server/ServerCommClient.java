@@ -74,31 +74,27 @@ public class ServerCommClient extends Thread {
 						break;
 					case "Fire":
 						player.fireBullet();
-						//System.out.println("fire");
 					case "ReQuestGameInfo":
 						out.writeObject(new GameInfo(gManager.getGame()));
 						out.flush();
-						//System.out.println("Asdasdasdasd");
 					default:
 						break;
 					}
 
-				//	System.out.println(player.getX() + "___________" + player.getY());
-				} catch (SocketException e) {
+				} catch (Exception e) {
 					running = false;
-					
 				}
 				try {Thread.sleep(1);} catch (InterruptedException e) {	}	
 			}
 		} catch (Exception e1) {
-			e1.printStackTrace();
-			System.out.println("failed");
+			
 		}
 		System.out.println("SERVER CLIENT ENDED");
 		try {
 			player.setDisconnect(true);
+			System.out.println("SERVER CLIENT PLAYER ENDED");
+
 		}catch (Exception e) {
-			//e.printStackTrace();	
 		}
 
 	}

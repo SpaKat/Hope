@@ -147,7 +147,6 @@ public class Team extends ArrayList<Player> implements Serializable {
 
 	public void moveFlag() {
 		flag.move();
-		//	System.out.println("Team.java  Flag x: " + flag.getX() + "   y: "+ flag.getY());
 	}
 
 	public boolean takenFlag() {
@@ -177,7 +176,6 @@ public class Team extends ArrayList<Player> implements Serializable {
 		double deltaY = Math.abs(player.getY() - homeBase.getY());
 		double range = homeBase.getRadius();
 		boolean b = false;
-		System.err.println(deltaX+"\t"+deltaY+"\t"+player.isDied()+"\t"+player.isSpawned());
 		if (deltaX < range && deltaY < range && !player.isDied() && player.isSpawned()) {
 			b = true;
 		}

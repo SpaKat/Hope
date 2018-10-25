@@ -37,7 +37,6 @@ public class Flag extends GameColorObject{
 		}else {
 			taken = false;
 		}
-		
 	}
 
 	public void reset() {

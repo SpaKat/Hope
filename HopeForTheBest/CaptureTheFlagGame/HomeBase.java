@@ -12,6 +12,4 @@ public class HomeBase extends GameColorObject{
 		setRadius(50);
 	}
 
-	
-	
 }

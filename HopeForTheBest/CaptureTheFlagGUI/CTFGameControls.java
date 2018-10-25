@@ -16,9 +16,7 @@ public class CTFGameControls extends Menu{
 		addQuickButtons();
 	}
 
-
 	private void addQuickButtons() {
-		
 		MenuItem reset = new MenuItem("Reset The Game");
 		reset.setOnAction(e ->{
 			gManager.reset();
