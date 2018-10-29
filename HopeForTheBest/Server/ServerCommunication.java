@@ -1,8 +1,12 @@
 package Server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Inet4Address;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 
 import CaptureTheFlagGame.GameManager;
@@ -27,6 +31,7 @@ public class ServerCommunication extends Thread{
 	@Override
 	public void run() {
 		try {
+
 			serverSocket = new ServerSocket(port);
 			while(running) {
 

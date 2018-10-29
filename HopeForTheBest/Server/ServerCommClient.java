@@ -5,15 +5,13 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketException;
 
 import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
 import Message.GameInfo;
 import Message.Heading;
-import Message.StatsMessage;
-import Message.Teamid;
+import Message.NewPlayer;
 
 public class ServerCommClient extends Thread {
 
@@ -35,59 +33,53 @@ public class ServerCommClient extends Thread {
 	public void run() {
 
 
-		int changeStats = 1;
-		int changeTeam = 1;
+		int newPlayer = 1;
 		try {
-			InputStream i = socket.getInputStream();
 			out = new ObjectOutputStream(socket.getOutputStream());
-			in = new ObjectInputStream(i);
+			in = new ObjectInputStream(socket.getInputStream());
+			
 			while (running) {
-
 				try {
 					Object message = in.readObject();
 					switch (message.getClass().getSimpleName()) {
-					case "StatsMessage":
-						if (changeStats-- >0) {
-							Statistics stats = new Statistics(((StatsMessage) message).getAttack(),
-									((StatsMessage) message).getDefense(), 
-									((StatsMessage) message).getHealth(), 
-									((StatsMessage) message).getMovespeed());
+					case "NewPlayer":
+						if (newPlayer >0) {
+							Statistics stats = new Statistics(((NewPlayer) message).getAttack(),
+									((NewPlayer) message).getDefense(), 
+									((NewPlayer) message).getHealth(), 
+									((NewPlayer) message).getMovespeed());
 							if (stats.getRateing()) {
 								player = new Player(stats);
+								if(!gManager.addPlayer(player, ((NewPlayer )message).getId())) {
+									socket.close();
+								}
 							}else {
 								socket.close();
 							}
-							
 						}
-						break;
-					case "Teamid":
-						if (changeStats <=0 && changeTeam-- > 0 ) {
-							if(!gManager.addPlayer(player, ((Teamid )message).getId())) {
-								socket.close();
-							}
-						}
+						newPlayer--;
 						break;
 					case "Heading":
-						if(changeStats <=0 && changeTeam<= 0) {
-							player.setHeading(((Heading) message).getHeading());
-						}
+						new ReadHeading(message,player);
 						break;
 					case "Fire":
-						player.fireBullet();
+						new ReadFireBullet(player);
+						break;
 					case "ReQuestGameInfo":
-						out.writeObject(new GameInfo(gManager.getGame()));
-						out.flush();
+							out.writeObject(new GameInfo(gManager.getGame()));
+							out.flush();
 					default:
+						
 						break;
 					}
 
 				} catch (Exception e) {
 					running = false;
 				}
-				try {Thread.sleep(1);} catch (InterruptedException e) {	}	
+				try {Thread.sleep(0, 1);} catch (InterruptedException e) {	}	
 			}
 		} catch (Exception e1) {
-			
+			e1.printStackTrace();
 		}
 		System.out.println("SERVER CLIENT ENDED");
 		try {
@@ -95,8 +87,8 @@ public class ServerCommClient extends Thread {
 			System.out.println("SERVER CLIENT PLAYER ENDED");
 
 		}catch (Exception e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	public void end() {

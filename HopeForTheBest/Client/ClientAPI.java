@@ -1,5 +1,7 @@
 package Client;
 
+import java.io.IOException;
+
 import CaptureTheFlagGame.Statistics;
 import Message.AllTeamInfo;
 import Message.GameboardInfo;
@@ -15,19 +17,13 @@ public class ClientAPI {
 		client = new Client(ip, port);
 	}
 	
-	public void connect(Statistics stats, int teamId) {
-		try {
+	public void connect(Statistics stats, int teamId) throws Exception{
 			client.setUpPlayer(stats, teamId);
-		} catch (Exception e) {
-			System.err.println("connection Failed");
-		}
+			try {Thread.sleep(17);}catch (Exception e) {}
 	}
-	public void refreshGameInfo() {
-		try {
+	public void refreshGameInfo() throws Exception{
 			client.askForGameInfo();
-		} catch (Exception e) {
-			System.err.println("connection Failed");
-		}
+			try {Thread.sleep(17);}catch (Exception e) {}
 	}
 	public GameboardInfo gameBoard() {
 		return client.getGameInfo().getGameboard();
@@ -35,13 +31,16 @@ public class ClientAPI {
 	public AllTeamInfo allTeams() {
 		return client.getGameInfo().getTeam();
 	}
-	public void sendHeading(double heading) {
+	public void sendHeading(double heading) throws IOException{
 		client.sendHeading(heading);
+		try {Thread.sleep(17);}catch (Exception e) {}
+
 	}
-	public void fire() {
+	public void fire() throws IOException{
 		client.fire();
+		try {Thread.sleep(17);}catch (Exception e) {}
 	}
-	public void end() {
+	public void end() throws IOException{
 		client.end();
 	}
 }

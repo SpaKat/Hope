@@ -14,7 +14,7 @@ public class Statistics implements Serializable{
 	private double health;
 	private double movespeed;
 	private final double MAXRATING = 100;
-	private final double SCALE = 25;
+	private final double SCALE = 5;
 
 	public Statistics(double attack,double defense,double health,double movespeed) {
 		this.attack = attack;
@@ -75,6 +75,6 @@ public class Statistics implements Serializable{
 		this.defense = defense;
 	}
 	public void setMovespeed(double movespeed) {
-		this.movespeed = movespeed;
+		this.movespeed = movespeed/SCALE;
 	}
 }

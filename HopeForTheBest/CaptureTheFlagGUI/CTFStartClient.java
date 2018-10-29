@@ -2,6 +2,8 @@ package CaptureTheFlagGUI;
 
 
 
+import java.io.IOException;
+
 import CaptureTheFlagGame.Statistics;
 import Client.Client;
 import javafx.geometry.Pos;
@@ -20,6 +22,7 @@ public class CTFStartClient extends VBox {
 
 	private Client client;
 	private double heading = 0;
+	private Statistics stats = new Statistics(0, 0, 0, 0);
 	public CTFStartClient() {
 		setAlignment(Pos.CENTER);
 		Text askforIP = new Text("Enter Ip Address");
@@ -37,7 +40,7 @@ public class CTFStartClient extends VBox {
 		});
 		this.getChildren().addAll(askforIP,enterIP, askforPort,enterPort,enter);
 	}
-	Statistics stats = new Statistics(0, 0, 0, 0);
+	
 	private void setUpPlayer() {
 		getChildren().clear();
 
@@ -140,9 +143,9 @@ public class CTFStartClient extends VBox {
 				heading = 2.0*Math.PI;
 			}
 			if(e.getCode() == KeyCode.SPACE) {
-				client.fire();
+				try {client.fire();} catch (IOException e1) {}
 			}
-			client.sendHeading(heading);
+			try {client.sendHeading(heading);} catch (IOException e1) {}
 		});
 	}
 

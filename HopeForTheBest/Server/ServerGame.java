@@ -13,7 +13,7 @@ public class ServerGame extends Thread {
 	public void run() {
 		while (running) {
 			gManager.OneTurn();
-			try {Thread.sleep(50);} catch (InterruptedException e) {}
+			try {Thread.sleep(20);} catch (InterruptedException e) {}
 		}
 
 	}

@@ -113,4 +113,12 @@ public class Player extends GameColorObject{
 		}
 		return same;
 	}
+
+	public boolean canFire() {
+		boolean b = false;
+		if (bullets.size() < maxBullets && isSpawned()) {
+			b= true;
+		}
+		return b;
+	}
 }
