@@ -86,7 +86,7 @@ public class CTFStartClient extends VBox {
 		Slider movespeedBar = new Slider();
 		setupStatBars(movespeedBar);
 		movespeedBar.valueProperty().addListener((arg,oldV,newV)->{
-			stats.setMovespeed(newV.doubleValue());
+			stats.setMovespeed(newV.doubleValue()/stats.getSCALE());
 			if (!stats.getRateing()) {
 				stats.setMovespeed(oldV.doubleValue());
 				movespeedBar.setValue(oldV.doubleValue());
@@ -118,9 +118,9 @@ public class CTFStartClient extends VBox {
 	}
 
 	private void setupStatBars(Slider statBar) {
-		statBar.setMin(0);
+		statBar.setMin(.001);
 		statBar.setMax(100);
-		statBar.setValue(0);
+		statBar.setValue(25);
 		statBar.setShowTickMarks(true);
 		statBar.setShowTickLabels(true);
 	}

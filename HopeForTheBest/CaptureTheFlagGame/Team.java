@@ -187,7 +187,6 @@ public class Team extends ArrayList<Player> implements Serializable {
 	}
 
 	public void addPoint() {
-		System.out.println("got a point");
 		points++;
 	}
 	public void resetFlag() {
@@ -231,5 +230,15 @@ public class Team extends ArrayList<Player> implements Serializable {
 			// TODO: handle exception
 		}
 		return itdoes;
+	}
+
+	public void cleanPlayers() {
+		for (int i = 0; i < size(); i++) {
+			Player p = get(i);
+			if(p.isDisconnect()) {
+				p.cleanBullets();
+				remove(p);
+			}
+		}
 	}
 }

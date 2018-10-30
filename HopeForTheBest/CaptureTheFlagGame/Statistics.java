@@ -24,7 +24,7 @@ public class Statistics implements Serializable{
 		this.movespeed = movespeed/ SCALE;
 	}
 	public boolean getRateing() {
-		int rateing = (int)   Math.ceil(attack + defense + health + movespeed);
+		int rateing = (int)   Math.ceil(attack + defense + health + movespeed*SCALE);
 		boolean b = false;
 		if(rateing <= MAXRATING) {
 			b = true;
@@ -75,6 +75,9 @@ public class Statistics implements Serializable{
 		this.defense = defense;
 	}
 	public void setMovespeed(double movespeed) {
-		this.movespeed = movespeed/SCALE;
+		this.movespeed = movespeed;
+	}
+	public double getSCALE() {
+		return SCALE;
 	}
 }

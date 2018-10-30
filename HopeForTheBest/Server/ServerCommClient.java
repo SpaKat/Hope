@@ -66,8 +66,8 @@ public class ServerCommClient extends Thread {
 						new ReadFireBullet(player);
 						break;
 					case "ReQuestGameInfo":
-							out.writeObject(new GameInfo(gManager.getGame()));
-							out.flush();
+						new SendGameInfo(out,gManager);
+						break;
 					default:
 						
 						break;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import CaptureTheFlagGame.Statistics;
 import Message.AllTeamInfo;
 import Message.GameboardInfo;
+import Message.TeamInfo;
 
 public class ClientAPI {
 
@@ -21,7 +22,7 @@ public class ClientAPI {
 			client.setUpPlayer(stats, teamId);
 			try {Thread.sleep(17);}catch (Exception e) {}
 	}
-	public void refreshGameInfo() throws Exception{
+	public void requestGameInfo() throws Exception{
 			client.askForGameInfo();
 			try {Thread.sleep(17);}catch (Exception e) {}
 	}
@@ -30,6 +31,9 @@ public class ClientAPI {
 	}
 	public AllTeamInfo allTeams() {
 		return client.getGameInfo().getTeam();
+	}
+	public TeamInfo getTeam(int index) throws IndexOutOfBoundsException{
+		return client.getGameInfo().getTeam().get(index);
 	}
 	public void sendHeading(double heading) throws IOException{
 		client.sendHeading(heading);

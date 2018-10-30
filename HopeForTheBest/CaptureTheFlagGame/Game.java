@@ -12,7 +12,7 @@ public class Game implements Serializable{
 	private Gameboard gameboard;
 	private ArrayList<Team> teams;
 	private int maxTeams = 2;
-	private int pointsToWin = 1;
+	private int pointsToWin = maxTeams-1;
 	private boolean gameWon = false; 
 	private Team WinningTeam;  
 
@@ -146,5 +146,11 @@ public class Game implements Serializable{
 
 	public Gameboard getGameboard() {
 		return gameboard;
+	}
+
+	public void removeDisconnectedPlayes() {
+		teams.forEach(team ->{
+			team.cleanPlayers();
+		});
 	}
 }

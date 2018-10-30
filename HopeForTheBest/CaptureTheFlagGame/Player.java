@@ -27,7 +27,7 @@ public class Player extends GameColorObject{
 		if (stats.getHealth()<=0 ) {
 			died = true;
 			if(isSpawned()) {
-			DeathStart = System.currentTimeMillis();
+				DeathStart = System.currentTimeMillis();
 			}
 			setSpawned(false);
 		}
@@ -74,16 +74,20 @@ public class Player extends GameColorObject{
 		return ready;
 	}
 	public void hit(Player otherPlayer) {
-		for (int i = 0; i < bullets.size(); i++) {
-			Bullet bullet = bullets.get(i);
-			double deltaX = Math.abs(otherPlayer.getX() - bullet.getX());
-			double deltaY = Math.abs(otherPlayer.getY() - bullet.getY());
-			double range = bullet.getRadius() + otherPlayer.getRadius();
-			if (deltaX<= range && deltaY <= range) {
-				otherPlayer.take(bullet.getDamage());
-				bullets.remove(bullet);
-				bullet.remove();
+		try {
+			for (int i = 0; i < bullets.size(); i++) {
+				Bullet bullet = bullets.get(i);
+				double deltaX = Math.abs(otherPlayer.getX() - bullet.getX());
+				double deltaY = Math.abs(otherPlayer.getY() - bullet.getY());
+				double range = bullet.getRadius() + otherPlayer.getRadius();
+				if (deltaX<= range && deltaY <= range) {
+					otherPlayer.take(bullet.getDamage());
+					bullets.remove(bullet);
+					bullet.remove();
+				}
 			}
+		}catch (NullPointerException e) {
+			
 		}
 
 	}
@@ -120,5 +124,12 @@ public class Player extends GameColorObject{
 			b= true;
 		}
 		return b;
+	}
+
+	public void cleanBullets() {
+		for (int i = 0; i < bullets.size(); i++) {
+			Bullet b = bullets.get(i);
+			b.remove();
+		}
 	}
 }
