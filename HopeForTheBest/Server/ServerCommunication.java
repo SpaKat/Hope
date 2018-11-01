@@ -15,7 +15,7 @@ public class ServerCommunication extends Thread{
 
 	private GameManager gManager;
 	private boolean running = true;
-	private int port = 8008;
+	private int port = 26539;
 	private ArrayList<ServerCommClient> clients;
 	private ServerGame serverGame;
 	private ServerSocket serverSocket;

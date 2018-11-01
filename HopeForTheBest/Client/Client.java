@@ -11,7 +11,7 @@ import Message.Heading;
 import Message.NewPlayer;
 import Message.ReQuestGameInfo;
 
-public class Client extends Thread{
+public class Client{
 
 	private Socket socket;
 	private ObjectInputStream in;

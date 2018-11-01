@@ -32,7 +32,7 @@ public class ServerCommClient extends Thread {
 	@Override
 	public void run() {
 
-
+		//System.out.println("STARTING");
 		int newPlayer = 1;
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());

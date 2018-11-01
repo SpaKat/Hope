@@ -12,7 +12,7 @@ public class ClientAPI {
 	
 	private Client client;
 	public ClientAPI(String ip) {
-		client = new Client(ip, 8008);
+		client = new Client(ip, 26539);
 	}
 	public ClientAPI(String ip, int port) {
 		client = new Client(ip, port);

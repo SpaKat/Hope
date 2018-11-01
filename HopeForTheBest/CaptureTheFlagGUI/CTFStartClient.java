@@ -29,7 +29,7 @@ public class CTFStartClient extends VBox {
 		TextField enterIP = new TextField("127.0.0.1");
 
 		Text askforPort = new Text("Enter Ip Address");
-		TextField enterPort = new TextField("8008");
+		TextField enterPort = new TextField("26539");
 
 		Button enter = new Button("Enter");
 		enter.setOnAction(e->{
@@ -118,9 +118,9 @@ public class CTFStartClient extends VBox {
 	}
 
 	private void setupStatBars(Slider statBar) {
-		statBar.setMin(.001);
+		statBar.setMin(0);
 		statBar.setMax(100);
-		statBar.setValue(25);
+		statBar.setValue(5);
 		statBar.setShowTickMarks(true);
 		statBar.setShowTickLabels(true);
 	}
