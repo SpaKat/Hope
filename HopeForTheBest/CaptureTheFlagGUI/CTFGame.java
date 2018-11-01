@@ -46,6 +46,7 @@ public class CTFGame extends Pane {
 		teams.forEach(team ->{
 			team.update();
 		});
+		//System.out.println(gManager.isWinner());
 	}
 
 	public void end() {

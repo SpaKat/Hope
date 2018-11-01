@@ -22,7 +22,7 @@ public class CTFStartClient extends VBox {
 
 	private Client client;
 	private double heading = 0;
-	private Statistics stats = new Statistics(0, 0, 0, 0);
+	private Statistics stats = new Statistics(5, 5, 5, 5);
 	public CTFStartClient() {
 		setAlignment(Pos.CENTER);
 		Text askforIP = new Text("Enter Ip Address");
