@@ -13,9 +13,9 @@ public class GameManagerGUI extends BorderPane {
 		double x = 500; 
 		double y = 500;
 		gManager = new GameManager(x, y);
-		CTFmenu = new CTFMenuBar(gManager,this);
 		CTFclient = new CTFStartClient();
 		ctfGame = new CTFGame(gManager);
+		CTFmenu = new CTFMenuBar(gManager,this,ctfGame);
 		setCenter(ctfGame);
 		setTop(CTFmenu);
 	}

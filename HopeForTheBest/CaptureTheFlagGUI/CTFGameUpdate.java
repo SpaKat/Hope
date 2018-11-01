@@ -1,13 +1,16 @@
 package CaptureTheFlagGUI;
 
+import CaptureTheFlagGame.GameManager;
 import javafx.application.Platform;
 
 public class CTFGameUpdate extends Thread {
 
 	private CTFGame ctfGame;
 	private boolean running = true;
-	public CTFGameUpdate(CTFGame ctfGame) {
+	private GameManager gManager;
+	public CTFGameUpdate(CTFGame ctfGame, GameManager gManager) {
 		this.ctfGame = ctfGame;
+		this.gManager = gManager;
 		setName("CTFGame Update Thread");
 		this.start();
 	}
@@ -15,12 +18,22 @@ public class CTFGameUpdate extends Thread {
 	@Override
 	public void run() {
 		while(running) {
-			Platform.runLater(new Runnable() {
+			if(!gManager.isWinner()) {
+				Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
 					ctfGame.update();
 				}
 			});
+		}else {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					ctfGame.showWinner();
+				}
+			});
+			end();
+		}
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

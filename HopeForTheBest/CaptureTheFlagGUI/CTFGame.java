@@ -19,7 +19,7 @@ public class CTFGame extends Pane {
 		this.gManager = gManager;
 		setUpGame();
 		toBack();
-		backgroundUpdate = new CTFGameUpdate(this);
+		backgroundUpdate = new CTFGameUpdate(this,gManager);
 		setStyle("-fx-background-color: black");
 		linkSizeToManager(this.gManager);
 	}
@@ -51,6 +51,16 @@ public class CTFGame extends Pane {
 
 	public void end() {
 		backgroundUpdate.end();
+	//	gManager.gameover();
+	}
+
+	public void showWinner() {
+		new WinnerScreen(gManager.getWinningTeam());
+	}
+
+	public void reset() {
+		end();
+		backgroundUpdate = new CTFGameUpdate(this,gManager);
 	}
 
 

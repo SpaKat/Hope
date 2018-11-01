@@ -75,6 +75,7 @@ public class GameManager implements Serializable{
 	public void updateSize() {
 		game.resetForSize();
 	}
+
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
 	
 	public boolean canSend() {
@@ -89,4 +90,6 @@ public class GameManager implements Serializable{
 	public void resetSend() {
 		sendingGameInfo = 1;
 	}
+
+	
 }

@@ -13,7 +13,7 @@ public class CTFMenuBar extends MenuBar {
 	private GameManager gManager;
 	private ServerCommunication server;
 	private GameManagerGUI gameManagerGUI;
-	public CTFMenuBar(GameManager gManager, GameManagerGUI gameManagerGUI) {
+	public CTFMenuBar(GameManager gManager, GameManagerGUI gameManagerGUI, CTFGame ctfGame) {
 		this.gManager = gManager;
 		this.gameManagerGUI = gameManagerGUI;
 		toFront();
@@ -33,7 +33,7 @@ public class CTFMenuBar extends MenuBar {
 			this.gameManagerGUI.clientMode();
 		});
 		Client.getItems().addAll(client);
-		getMenus().addAll(Server,Client,new CTFGameControls(gManager));
+		getMenus().addAll(Server,Client,new CTFGameControls(gManager,ctfGame));
 	}
 
 	private void testFuncations() {

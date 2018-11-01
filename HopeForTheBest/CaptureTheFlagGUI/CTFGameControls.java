@@ -9,9 +9,10 @@ public class CTFGameControls extends Menu{
 
 
 	private GameManager gManager;
-
-	public CTFGameControls(GameManager gManager) {
+	private CTFGame ctfGame;
+	public CTFGameControls(GameManager gManager, CTFGame ctfGame) {
 		this.gManager = gManager;
+		this.ctfGame = ctfGame;
 		setText("Controls");
 		addQuickButtons();
 	}
@@ -20,6 +21,7 @@ public class CTFGameControls extends Menu{
 		MenuItem reset = new MenuItem("Reset The Game");
 		reset.setOnAction(e ->{
 			gManager.reset();
+			ctfGame.reset();
 		});
 		getItems().add(reset);
 	}
