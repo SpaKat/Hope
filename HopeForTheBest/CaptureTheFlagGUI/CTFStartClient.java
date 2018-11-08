@@ -28,7 +28,7 @@ public class CTFStartClient extends VBox {
 		Text askforIP = new Text("Enter Ip Address");
 		TextField enterIP = new TextField("127.0.0.1");
 
-		Text askforPort = new Text("Enter Ip Address");
+		Text askforPort = new Text("Enter Port");
 		TextField enterPort = new TextField("26539");
 
 		Button enter = new Button("Enter");
