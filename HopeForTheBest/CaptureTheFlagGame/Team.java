@@ -201,12 +201,14 @@ public class Team extends ArrayList<Player> implements Serializable {
 	}
 
 	public void reset() {
+		flag.reset();
+		spawnFlags();
 		for (int i = 0; i < size(); i++) {
 			Player player = get(i);
 			spawnAtHome(player, new Random());
 		}
 		points = 0;
-		spawnFlags();
+		
 	}
 
 	public void resetForSize() {

@@ -9,8 +9,6 @@ import Message.PlayerInfo;
 import Message.TeamInfo;
 
 public class ClientAPI {
-
-	
 	private Client client;
 	public ClientAPI(String ip) {
 		client = new Client(ip, 26539);
@@ -18,14 +16,14 @@ public class ClientAPI {
 	public ClientAPI(String ip, int port) {
 		client = new Client(ip, port);
 	}
-	
+
 	public void connect(Statistics stats, int teamId) throws Exception{
-			client.setUpPlayer(stats, teamId);
-			try {Thread.sleep(17);}catch (Exception e) {}
+		client.setUpPlayer(stats, teamId);
+		try {Thread.sleep(17);}catch (Exception e) {}
 	}
 	public void requestGameInfo() throws Exception{
-			client.askForGameInfo();
-			try {Thread.sleep(17);}catch (Exception e) {}
+		client.askForGameInfo();
+		try {Thread.sleep(17);}catch (Exception e) {}
 	}
 	public GameboardInfo gameBoard() {
 		return client.getGameInfo().getGameboard();
@@ -39,7 +37,6 @@ public class ClientAPI {
 	public void sendHeading(double heading) throws IOException{
 		client.sendHeading(heading);
 		try {Thread.sleep(17);}catch (Exception e) {}
-
 	}
 	public void fire() throws IOException{
 		client.fire();

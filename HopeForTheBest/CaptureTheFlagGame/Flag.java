@@ -14,7 +14,7 @@ public class Flag extends GameColorObject{
 		setColor(color);
 		setRadius(7);
 	}
-	 
+
 	public void gotTakenBy(Player player) {
 		this.player = player;
 	}
@@ -25,17 +25,22 @@ public class Flag extends GameColorObject{
 		return taken;
 	}
 	public void move() {
-		if (player != null) {
-			if (player.isDied() || player.isDisconnect() || !player.isSpawned()) {
-				player = null;
-				taken = false;
+		try{
+			if (player != null) {
+				if (player.isDied() || player.isDisconnect() || !player.isSpawned()) {
+					player = null;
+					taken = false;
+				}else {
+					setX(player.getX());
+					setY(player.getY());
+					taken = true;
+				}
 			}else {
-				setX(player.getX());
-				setY(player.getY());
-				taken = true;
+				taken = false;
 			}
-		}else {
-			taken = false;
+		}catch (Exception e) {
+			player = null;
+			e.printStackTrace();
 		}
 	}
 

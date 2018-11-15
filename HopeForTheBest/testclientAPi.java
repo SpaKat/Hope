@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 import CaptureTheFlagGame.Statistics;
 import Client.ClientAPI;
@@ -26,7 +27,7 @@ public class testclientAPi extends Thread{
 	private void test() {
 		ClientAPI c= new ClientAPI("127.0.0.1");
 
-		Statistics stats = new Statistics(1, 1, 1, 85);
+		Statistics stats = new Statistics(1, 8, 5, 85);
 
 		double heading = Math.PI;
 
@@ -44,8 +45,10 @@ public class testclientAPi extends Thread{
 		}
 		boolean running =true;
 		try {
+			Scanner scan = new Scanner(System.in);
+
 			while(running) {
-				c.requestPlayerInfo();
+				/*c.requestPlayerInfo();
 				c.requestGameInfo();
 				try {
 					FlagInfo flag = c.getTeam(1).getFlag(); 
@@ -60,7 +63,28 @@ public class testclientAPi extends Thread{
 
 				} catch (Exception e) {
 					e.printStackTrace();
+				}*/
+
+				switch (scan.nextLine()) {
+				case "s":
+					c.sendHeading(Math.PI/2);
+					break;
+				case "d":
+					c.sendHeading(0);
+					break;
+				case "w":
+					c.sendHeading(3*Math.PI/2);
+					break;
+				case "a":
+					c.sendHeading(Math.PI);
+					break;
+				case " ":
+					c.fire();
+					break;
+				default:
+					break;
 				}
+
 
 				try {Thread.sleep(17);}catch (Exception e) {}
 			}
