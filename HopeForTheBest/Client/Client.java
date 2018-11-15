@@ -9,7 +9,9 @@ import Message.Fire;
 import Message.GameInfo;
 import Message.Heading;
 import Message.NewPlayer;
+import Message.PlayerInfo;
 import Message.ReQuestGameInfo;
+import Message.ReQuestPlayerInfo;
 
 public class Client{
 
@@ -19,6 +21,7 @@ public class Client{
 	private int port;
 	private String ip;
 	private GameInfo gameInfo;
+	private PlayerInfo playerInfo;
 	private boolean running = true; 
 	private ReadThread readThread;
 	public Client(String ip,int port) {
@@ -64,5 +67,15 @@ public class Client{
 	}
 	public void setGameInfo(GameInfo gameInfo) {
 		this.gameInfo = gameInfo;
+	}
+	public PlayerInfo getPlayerInfo() {
+		return playerInfo;
+	}
+	public void askForPlayerInfo() throws IOException {
+		out.writeObject(new ReQuestPlayerInfo());
+		out.flush();
+	}
+	public void setPlayerInfo(PlayerInfo playerInfo) {
+		this.playerInfo = playerInfo;
 	}
 }

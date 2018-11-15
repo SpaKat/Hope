@@ -5,6 +5,7 @@ import java.io.IOException;
 import CaptureTheFlagGame.Statistics;
 import Message.AllTeamInfo;
 import Message.GameboardInfo;
+import Message.PlayerInfo;
 import Message.TeamInfo;
 
 public class ClientAPI {
@@ -46,5 +47,12 @@ public class ClientAPI {
 	}
 	public void end() throws IOException{
 		client.end();
+	}
+	public PlayerInfo getPlayerInfo() {
+		return client.getPlayerInfo();
+	}
+	public void requestPlayerInfo() throws IOException{
+		client.askForPlayerInfo();
+		try {Thread.sleep(17);}catch (Exception e) {}
 	}
 }

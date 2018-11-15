@@ -1,6 +1,7 @@
 package Client;
 
 import Message.GameInfo;
+import Message.PlayerInfo;
 
 public class ReadThread extends Thread{
 
@@ -18,6 +19,9 @@ public class ReadThread extends Thread{
 				switch (o.getClass().getSimpleName()) {
 				case "GameInfo":
 					client.setGameInfo((GameInfo) o);
+					break;
+				case "PlayerInfo":
+					client.setPlayerInfo((PlayerInfo) o);
 					break;
 				default:
 					break;

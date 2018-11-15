@@ -68,6 +68,9 @@ public class ServerCommClient extends Thread {
 					case "ReQuestGameInfo":
 						new SendGameInfo(out,gManager);
 						break;
+					case "ReQuestPlayerInfo":
+						new SendPlayerInfo(out,player);
+						break;
 					default:
 						
 						break;
