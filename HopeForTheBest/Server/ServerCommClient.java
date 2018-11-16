@@ -91,6 +91,8 @@ public class ServerCommClient extends Thread {
 			e1.printStackTrace();
 		}
 		System.out.println("SERVER CLIENT ENDED");
+		sendGameInfo.interrupt();
+		sendPlayerInfo.interrupt();
 		try {
 			player.setDisconnect(true);
 			System.out.println("SERVER CLIENT PLAYER ENDED");
