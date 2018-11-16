@@ -22,6 +22,8 @@ public class ServerCommClient extends Thread {
 	private Player player;
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
+	private SendGameInfo sendGameInfo ;
+	private SendPlayerInfo sendPlayerInfo ;
 	public ServerCommClient(GameManager gManager,Socket socket) {
 		this.gManager = gManager;
 		this.socket = socket;
@@ -37,6 +39,7 @@ public class ServerCommClient extends Thread {
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
+			sendGameInfo = new SendGameInfo(out,gManager);
 			
 			while (running) {
 				try {
@@ -50,6 +53,7 @@ public class ServerCommClient extends Thread {
 									((NewPlayer) message).getMovespeed());
 							if (stats.getRateing()) {
 								player = new Player(stats);
+								sendPlayerInfo = new SendPlayerInfo(out, player);
 								if(!gManager.addPlayer(player, ((NewPlayer )message).getId())) {
 									socket.close();
 								}
@@ -60,26 +64,28 @@ public class ServerCommClient extends Thread {
 						newPlayer--;
 						break;
 					case "Heading":
-						new ReadHeading(message,player);
+						new ReadHeading(message, player);
 						break;
 					case "Fire":
 						new ReadFireBullet(player);
 						break;
 					case "ReQuestGameInfo":
-						new SendGameInfo(out,gManager);
+						sendGameInfo.send();
+						sendGameInfo.interrupt();
 						break;
 					case "ReQuestPlayerInfo":
-						new SendPlayerInfo(out,player);
+						sendPlayerInfo.send();
+						sendPlayerInfo.interrupt();
 						break;
 					default:
-						
+
 						break;
 					}
 
 				} catch (Exception e) {
 					running = false;
 				}
-				try {Thread.sleep(0, 1);} catch (InterruptedException e) {	}	
+				try {Thread.sleep(1);} catch (InterruptedException e) {	}	
 			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -96,6 +102,8 @@ public class ServerCommClient extends Thread {
 
 	public void end() {
 		running = false;
+		sendGameInfo.end();
+		sendPlayerInfo.end();
 	}
 
 }

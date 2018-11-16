@@ -52,4 +52,7 @@ public class ClientAPI {
 		client.askForPlayerInfo();
 		try {Thread.sleep(17);}catch (Exception e) {}
 	}
+	public boolean isAlive() {
+		return client.isAlive();
+	}
 }

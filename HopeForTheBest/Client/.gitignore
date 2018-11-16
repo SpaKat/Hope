@@ -2,3 +2,5 @@
 /ClientAPI.class
 /ReadThread.class
 /ReadGameInfo.class
+/SetGameInfo.class
+/SetPlayerInfo.class

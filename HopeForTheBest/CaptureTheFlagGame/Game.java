@@ -12,7 +12,7 @@ public class Game implements Serializable{
 	private Gameboard gameboard;
 	private ArrayList<Team> teams;
 	private int maxTeams = 2;
-	private int pointsToWin = maxTeams-1;
+	private int pointsToWin = maxTeams-1+80000;
 	private boolean gameWon = false; 
 	private Team WinningTeam;  
 

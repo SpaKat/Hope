@@ -27,7 +27,7 @@ public class testclientAPi extends Thread{
 	private void test() {
 		ClientAPI c= new ClientAPI("127.0.0.1");
 
-		Statistics stats = new Statistics(1, 8, 5, 85);
+		Statistics stats = new Statistics(1, 1, 1, 85);
 
 		double heading = Math.PI;
 
@@ -43,28 +43,27 @@ public class testclientAPi extends Thread{
 			// TODO Auto-generated catch block
 			//e1.printStackTrace();
 		}
-		boolean running =true;
 		try {
-			Scanner scan = new Scanner(System.in);
 
-			while(running) {
-				/*c.requestPlayerInfo();
+			while(c.isAlive()) {
+				c.requestPlayerInfo();
 				c.requestGameInfo();
+				c.fire();
 				try {
-					FlagInfo flag = c.getTeam(1).getFlag(); 
+					FlagInfo flag = c.getTeam(Math.abs(1-teamId)).getFlag(); 
 					PlayerInfo player = c.getPlayerInfo();
-					if(flag.getX()-player.getX()  >1 && flag.getY() - player.getY()  > 1) {
+					if(Math.abs(flag.getX()-player.getX())  >1 && Math.abs(flag.getY() - player.getY() ) > 1) {
 						c.sendHeading( Math.atan2( flag.getY() - player.getY() ,flag.getX()-player.getX()  ));
 					//	System.out.println(Math.atan2( c.getTeam(1).getFlag().getY() - c.getTeam(1).getFlag().getY() ,flag.getX()-player.getX()  ));
 					}else {
-						c.sendHeading( Math.atan2( c.getTeam(0).getFlag().getY() - player.getY() ,c.getTeam(0).getFlag().getX()-player.getX()  ));
+						c.sendHeading( Math.atan2( c.getTeam(teamId).getHomeBase().getY() - player.getY() ,c.getTeam(teamId).getHomeBase().getX()-player.getX()  ));
 					//	System.out.println(Math.atan2( c.getTeam(0).getFlag().getY() - player.getY() ,c.getTeam(0).getFlag().getX()-player.getX()  ));
 					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
-				}*/
-
+				}
+/*
 				switch (scan.nextLine()) {
 				case "s":
 					c.sendHeading(Math.PI/2);
@@ -84,7 +83,7 @@ public class testclientAPi extends Thread{
 				default:
 					break;
 				}
-
+*/
 
 				try {Thread.sleep(17);}catch (Exception e) {}
 			}

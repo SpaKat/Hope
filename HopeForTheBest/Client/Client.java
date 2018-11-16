@@ -78,4 +78,7 @@ public class Client{
 	public void setPlayerInfo(PlayerInfo playerInfo) {
 		this.playerInfo = playerInfo;
 	}
+	public boolean isAlive() {
+		return !socket.isClosed();
+	}
 }
