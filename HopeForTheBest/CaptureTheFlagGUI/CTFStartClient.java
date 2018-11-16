@@ -4,16 +4,15 @@ package CaptureTheFlagGUI;
 
 import java.io.IOException;
 
+import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Statistics;
 import Client.Client;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -23,7 +22,9 @@ public class CTFStartClient extends VBox {
 	private Client client;
 	private double heading = 0;
 	private Statistics stats = new Statistics(5, 5, 5, 5);
-	public CTFStartClient() {
+	private GameManagerGUI gameManagerGUI;
+	public CTFStartClient(GameManagerGUI gameManagerGUI) {
+		this.gameManagerGUI = gameManagerGUI;
 		setAlignment(Pos.CENTER);
 		Text askforIP = new Text("Enter Ip Address");
 		TextField enterIP = new TextField("127.0.0.1");
@@ -125,9 +126,11 @@ public class CTFStartClient extends VBox {
 		statBar.setShowTickLabels(true);
 	}
 	private void makeControls() {
-		Label info = new Label(" W - up \n A - down \n S - left \n D - right \n fire - Space");
+		//Label info = new Label(" W - up \n A - down \n S - left \n D - right \n fire - Space");
 		getChildren().clear();
-		getChildren().add(info);
+		//getChildren().add(info);
+		
+		
 		getScene().setOnKeyPressed(e->{
 			
 			if(e.getCode() == KeyCode.W) {
@@ -147,6 +150,7 @@ public class CTFStartClient extends VBox {
 			}
 			try {client.sendHeading(heading);} catch (IOException e1) {}
 		});
+		gameManagerGUI.makeClient();
 	}
 
 	public void end() {
@@ -155,6 +159,12 @@ public class CTFStartClient extends VBox {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public Pane makeClient() {
+		CTFGame ctfGame = new CTFGame(client);
+		
+		return ctfGame;
 	}
 
 }

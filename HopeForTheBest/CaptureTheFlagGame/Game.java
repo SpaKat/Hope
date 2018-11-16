@@ -153,4 +153,10 @@ public class Game implements Serializable{
 			team.cleanPlayers();
 		});
 	}
+
+	public void fill() {
+		teams.forEach(team->{
+			team.fill();
+		});
+	}
 }

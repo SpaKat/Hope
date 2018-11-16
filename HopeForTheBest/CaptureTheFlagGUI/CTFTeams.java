@@ -46,4 +46,11 @@ public class CTFTeams extends ArrayList<CTFPlayers>{
 			}
 		}
 	}
+	public void updateClient() {
+		flag.updateClient();
+		homebase.updateClient();
+		for (int i = 0; i < size(); i++) {
+			get(i).updateClient();
+		}
+	}
 }

@@ -243,4 +243,10 @@ public class Team extends ArrayList<Player> implements Serializable {
 			}
 		}
 	}
+
+	public void fill() {
+		for (int i = 0; i < maxPlayers; i++) {
+			add(new Player(new Statistics(0, 0, 0, 0)));
+		}
+	}
 }

@@ -17,6 +17,9 @@ public class ClientAPI {
 		client = new Client(ip, port);
 	}
 
+	public ClientAPI(Client client2) {
+		this.client = client2;
+	}
 	public void connect(Statistics stats, int teamId) throws Exception{
 		client.setUpPlayer(stats, teamId);
 		try {Thread.sleep(17);}catch (Exception e) {}

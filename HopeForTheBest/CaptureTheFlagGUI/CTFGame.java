@@ -4,24 +4,33 @@ import java.util.ArrayList;
 
 import CaptureTheFlagGame.Game;
 import CaptureTheFlagGame.GameManager;
+import Client.Client;
 import javafx.scene.layout.Pane;
 
 public class CTFGame extends Pane {
 
 
-	private Game game;
+	
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
 		
 	public CTFGame(GameManager gManager) {
-		this.game = gManager.getGame();
 		this.gManager = gManager;
 		setUpGame();
 		toBack();
 		backgroundUpdate = new CTFGameUpdate(this,gManager);
 		setStyle("-fx-background-color: black");
 		linkSizeToManager(this.gManager);
+	}
+
+	public CTFGame(Client client) {
+		this.gManager = new GameManager(500, 500);
+		gManager.getGame().fill();
+		setUpGame();
+		toBack();
+		backgroundUpdate = new CTFClientGameUpdate(this,gManager,client);
+		setStyle("-fx-background-color: black");
 	}
 
 	private void linkSizeToManager(GameManager gManager) {
@@ -37,7 +46,7 @@ public class CTFGame extends Pane {
 
 	private void setUpGame() {
 		teams = new ArrayList<CTFTeams>();
-		game.getTeams().forEach(team ->{
+		gManager.getGame().getTeams().forEach(team ->{
 			teams.add(new CTFTeams(team,this));
 		});
 	}
@@ -61,6 +70,13 @@ public class CTFGame extends Pane {
 	public void reset() {
 		end();
 		backgroundUpdate = new CTFGameUpdate(this,gManager);
+	}
+
+	public void updateClient() {
+		teams.forEach(team ->{
+			team.updateClient();
+		});
+		
 	}
 
 

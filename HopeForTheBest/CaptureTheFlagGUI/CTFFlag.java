@@ -31,4 +31,10 @@ public class CTFFlag extends Circle {
 		}
 	}
 
+	public void updateClient() {
+		setStyle("-fx-fill: white;"
+				+"-fx-stroke:" +new ColorHexConveter(flag.getColor()).toString() +";"
+				+ "-fx-stroke-width:" + (flag.getRadius()-2)  +  ";");
+	}
+
 }

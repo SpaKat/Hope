@@ -132,4 +132,7 @@ public class Player extends GameColorObject{
 			b.remove();
 		}
 	}
+	public void setStats(Statistics stats) {
+		this.stats = stats;
+	}
 }

@@ -68,4 +68,10 @@ public class CTFPlayers extends Circle{
 	public Player getPlayer() {
 		return player;
 	}
+
+	public void updateClient() {
+		setStyle("-fx-fill: black;"
+				+"-fx-stroke:" +new ColorHexConveter(player.getColor()).toString() +";"
+				+ "-fx-stroke-width:" + (player.getRadius()-2)  +  ";");
+	}
 }

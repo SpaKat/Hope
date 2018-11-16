@@ -30,6 +30,13 @@ public class CTFHomeBase extends Circle {
 			setLayoutY(homeBase.getY());
 			toBack();
 		}
+		
+	}
+
+	public void updateClient() {
+		setStyle("-fx-fill: black;"
+				+"-fx-stroke:" +new ColorHexConveter(homeBase.getColor()).toString() +";"
+				+ "-fx-stroke-width:" + 2  +  ";");
 	}
 
 }

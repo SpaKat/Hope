@@ -19,7 +19,9 @@ public class Bullet extends GameColorObject {
 		setSpawned(true);
 		setRadius(3);
 	}
-	
+	public Bullet(double x, double y) {
+		this(x, y, 0, 0);
+	}
 	public double getSpeed() {
 		return speed;
 	}
