@@ -1,7 +1,5 @@
 package Server;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -9,8 +7,6 @@ import java.net.Socket;
 import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
-import Message.GameInfo;
-import Message.Heading;
 import Message.NewPlayer;
 
 public class ServerCommClient extends Thread {
@@ -91,8 +87,6 @@ public class ServerCommClient extends Thread {
 			e1.printStackTrace();
 		}
 		System.out.println("SERVER CLIENT ENDED");
-		sendGameInfo.interrupt();
-		sendPlayerInfo.interrupt();
 		try {
 			player.setDisconnect(true);
 			System.out.println("SERVER CLIENT PLAYER ENDED");

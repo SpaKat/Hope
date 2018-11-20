@@ -38,5 +38,6 @@ public class SendGameInfo extends Thread {
 	}
 	public void end() {
 		running = false;
+		interrupt();
 	}
 }

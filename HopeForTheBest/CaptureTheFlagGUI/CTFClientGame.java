@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import CaptureTheFlagGame.Bullet;
 import CaptureTheFlagGame.GameManager;
-import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;
 import CaptureTheFlagGame.Team;
 import Client.Client;
@@ -34,6 +33,7 @@ public class CTFClientGame extends Thread {
 				GameboardInfo gameboard = client.gameBoard();
 				gManager.getGame().getGameboard().setX(gameboard.getX());
 				gManager.getGame().getGameboard().setY(gameboard.getY());
+			//	System.out.println(gameboard.getX() + "       " + gameboard.getY());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -69,22 +69,25 @@ public class CTFClientGame extends Thread {
 										playerInfo.getStats().getDefense(),
 										playerInfo.getStats().getHealth(),
 										playerInfo.getStats().getMovespeed()));
-								/*team.get(j).getBullets().clear();
+								team.get(j).getBullets().forEach(bullet ->{
+									bullet.remove();
+								});
+								team.get(j).getBullets().clear();
 								for (int k = 0; k < playerInfo.getBullets().size(); k++) {
 									BulletInfo bulletInfo = playerInfo.getBullets().get(k);
 									Bullet bullet = new Bullet(bulletInfo.getX(), bulletInfo.getY());
 									team.get(j).getBullets().add(bullet);
-								}*/
+								}
 								
 								
 						}
 					
 					} catch (Exception e) {
-						// TODO: handle exception
+						e.printStackTrace();
 					}
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			try {Thread.sleep(17);}catch (Exception e) {};
 		}

@@ -39,5 +39,6 @@ public class SendPlayerInfo extends Thread{
 	}
 	public void end() {
 		running = false;
+		interrupt();
 	}
 }

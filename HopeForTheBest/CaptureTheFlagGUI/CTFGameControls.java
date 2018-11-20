@@ -3,7 +3,6 @@ package CaptureTheFlagGUI;
 import CaptureTheFlagGame.GameManager;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
 
 public class CTFGameControls extends Menu{
 

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class ObjectInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -666000639909710817L;
 	private double x; 
 	private double y;
 	

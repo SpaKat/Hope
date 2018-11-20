@@ -18,20 +18,15 @@ public class Client{
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private int port;
-	private String ip;
 	private GameInfo gameInfo;
 	private PlayerInfo playerInfo;
 	private boolean running = true; 
-	private ReadThread readThread;
 	public Client(String ip,int port) {
-		this.ip = ip;
-		this.port = port;
 		try {
 			socket = new Socket(ip, port);
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
-			readThread =new ReadThread(this);
+			new ReadThread(this);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

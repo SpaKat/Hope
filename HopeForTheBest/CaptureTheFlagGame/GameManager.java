@@ -10,7 +10,6 @@ public class GameManager implements Serializable{
 	private static final long serialVersionUID = 4587919392088390480L;
 	private Gameboard gameboard;
 	private Game game;
-	private int sendingGameInfo = 1;
 	public GameManager(double x,double y) {
 		gameboard = new Gameboard(x, y);
 		game = new Game(gameboard);
@@ -78,18 +77,5 @@ public class GameManager implements Serializable{
 
 	// ----------------------------------------- NEEDED FOR INTERNET ----------------------------------//
 	
-	public boolean canSend() {
-		boolean b;
-		if(sendingGameInfo-- >0) {
-			b = true;
-		}else {
-			b = false;
-		}
-		return b;
-	}
-	public void resetSend() {
-		sendingGameInfo = 1;
-	}
-
 	
 }

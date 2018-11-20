@@ -35,8 +35,10 @@ public class GameManagerGUI extends BorderPane {
 
 	
 	public void makeClient() {
+		getChildren().clear();	
 		setCenter(CTFclient.makeClient());
-		setTop(CTFmenu);
+			CTFmenu.toFront();
+			setTop(CTFmenu);
 	}	
 
 

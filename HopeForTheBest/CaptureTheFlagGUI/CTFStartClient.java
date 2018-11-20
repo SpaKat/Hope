@@ -4,7 +4,6 @@ package CaptureTheFlagGUI;
 
 import java.io.IOException;
 
-import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Statistics;
 import Client.Client;
 import javafx.geometry.Pos;
@@ -126,9 +125,9 @@ public class CTFStartClient extends VBox {
 		statBar.setShowTickLabels(true);
 	}
 	private void makeControls() {
-		//Label info = new Label(" W - up \n A - down \n S - left \n D - right \n fire - Space");
+	//	Label info = new Label(" W - up \n A - down \n S - left \n D - right \n fire - Space");
 		getChildren().clear();
-		//getChildren().add(info);
+	//	getChildren().add(info);
 		
 		
 		getScene().setOnKeyPressed(e->{

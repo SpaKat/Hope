@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import CaptureTheFlagGame.GameManager;
 import CaptureTheFlagGame.Player;
 import CaptureTheFlagGame.Statistics;

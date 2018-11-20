@@ -1,8 +1,6 @@
 package CaptureTheFlagGUI;
 
 import CaptureTheFlagGame.GameManager;
-import CaptureTheFlagGame.Player;
-import CaptureTheFlagGame.Statistics;
 import Server.ServerCommunication;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -10,11 +8,11 @@ import javafx.scene.control.MenuItem;
 
 public class CTFMenuBar extends MenuBar {
 
-	private GameManager gManager;
+	//private GameManager gManager;
 	private ServerCommunication server;
 	private GameManagerGUI gameManagerGUI;
 	public CTFMenuBar(GameManager gManager, GameManagerGUI gameManagerGUI, CTFGame ctfGame) {
-		this.gManager = gManager;
+	//	this.gManager = gManager;
 		this.gameManagerGUI = gameManagerGUI;
 		toFront();
 
@@ -35,7 +33,7 @@ public class CTFMenuBar extends MenuBar {
 		Client.getItems().addAll(client);
 		getMenus().addAll(Server,Client,new CTFGameControls(gManager,ctfGame));
 	}
-
+/*
 	private void testFuncations() {
 		Menu test = new Menu("Test");
 		MenuItem oneturn = new MenuItem ("One Turn");
@@ -70,7 +68,7 @@ public class CTFMenuBar extends MenuBar {
 		test.getItems().addAll(oneturn,spawn,hundredturn,spawnkill,killplayer,firebullet);
 		getMenus().add(test);
 	}
-
+*/
 	public void end() {
 		try {
 			server.end();

@@ -2,7 +2,6 @@ package CaptureTheFlagGUI;
 
 import java.util.ArrayList;
 
-import CaptureTheFlagGame.Game;
 import CaptureTheFlagGame.GameManager;
 import Client.Client;
 import javafx.scene.layout.Pane;
@@ -10,11 +9,10 @@ import javafx.scene.layout.Pane;
 public class CTFGame extends Pane {
 
 
-	
+
 	private CTFGameUpdate backgroundUpdate;
 	private ArrayList<CTFTeams> teams;
 	private GameManager gManager;
-		
 	public CTFGame(GameManager gManager) {
 		this.gManager = gManager;
 		setUpGame();
@@ -31,6 +29,7 @@ public class CTFGame extends Pane {
 		toBack();
 		backgroundUpdate = new CTFClientGameUpdate(this,gManager,client);
 		setStyle("-fx-background-color: black");
+		
 	}
 
 	private void linkSizeToManager(GameManager gManager) {
@@ -60,7 +59,7 @@ public class CTFGame extends Pane {
 
 	public void end() {
 		backgroundUpdate.end();
-	//	gManager.gameover();
+		//	gManager.gameover();
 	}
 
 	public void showWinner() {
@@ -76,7 +75,6 @@ public class CTFGame extends Pane {
 		teams.forEach(team ->{
 			team.updateClient();
 		});
-		
 	}
 
 

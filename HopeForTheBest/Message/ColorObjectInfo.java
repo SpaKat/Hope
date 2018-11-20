@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class ColorObjectInfo extends ObjectInfo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1715712474019195509L;
 	private int color ;
 	private boolean spawned;
 	private double radius; 

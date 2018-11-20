@@ -1,7 +1,6 @@
 package CaptureTheFlagGUI;
 
 import CaptureTheFlagGame.GameManager;
-import Client.Client;
 import javafx.application.Platform;
 
 public class CTFGameUpdate extends Thread {
