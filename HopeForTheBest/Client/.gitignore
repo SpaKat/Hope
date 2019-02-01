@@ -4,3 +4,5 @@
 /ReadGameInfo.class
 /SetGameInfo.class
 /SetPlayerInfo.class
+/SetGameBoardInfo.class
+/SetAllTeamInfo.class

@@ -1,13 +1,11 @@
 package Client;
 
-import Message.GameInfo;
+import Message.AllTeamInfo;
 
-public class SetGameInfo extends Thread {
-
-
+public class SetAllTeamInfo extends Thread {
 	private Object o;
 	private Client client;
-	public SetGameInfo(Client client) {
+	public SetAllTeamInfo(Client client) {
 		this.client = client;
 		start();
 	}
@@ -15,15 +13,14 @@ public class SetGameInfo extends Thread {
 	public void run() {
 		while(client.isRunning()) {
 			try {
-				client.setGameInfo((GameInfo) o);
+				client.setAllTeamInfo((AllTeamInfo) o);
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
-			try {Thread.sleep(10000);}catch(Exception e) {};
+			try {Thread.sleep(100000);}catch(Exception e) {};
 		}
 	}
 	public void setO(Object o) {
 		this.o = o;
 	}
-
 }

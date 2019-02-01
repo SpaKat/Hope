@@ -3,7 +3,8 @@ package Server;
 import java.io.ObjectOutputStream;
 
 import CaptureTheFlagGame.GameManager;
-import Message.GameInfo;
+import Message.AllTeamInfo;
+import Message.GameboardInfo;
 
 public class SendGameInfo extends Thread {
 
@@ -22,7 +23,10 @@ public class SendGameInfo extends Thread {
 		while(running) {
 			if(queue>0) {
 				try {
-					out.writeObject(new GameInfo(gManager.getGame()));
+					out.writeObject(new GameboardInfo(gManager.getGame().getGameboard()));
+					out.flush();
+					try {Thread.sleep(17);}catch (Exception e) {}
+					out.writeObject(new AllTeamInfo(gManager.getGame().getTeams()));
 					out.flush();
 				}catch (Exception e) {
 					// TODO: handle exception

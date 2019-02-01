@@ -56,8 +56,12 @@ public class Player extends GameColorObject{
 
 	public void moveBullets() {
 		for (int i = 0; i < bullets.size(); i++) {
-			if (bullets.get(i).move()) {
-				bullets.remove(bullets.get(i));
+			try {
+				if (bullets.get(i).move()) {
+					bullets.remove(bullets.get(i));
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
 		}
 	}
@@ -86,8 +90,8 @@ public class Player extends GameColorObject{
 					bullet.remove();
 				}
 			}
-		}catch (NullPointerException e) {
-			
+		}catch (Exception e) {
+
 		}
 
 	}

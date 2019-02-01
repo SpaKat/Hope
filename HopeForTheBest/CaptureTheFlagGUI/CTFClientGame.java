@@ -50,7 +50,6 @@ public class CTFClientGame extends Thread {
 						team.getHomeBase().setY(teamInfo.getHomeBase().getY());
 						team.getHomeBase().setRadius(teamInfo.getHomeBase().getRadius());
 						
-						
 						team.getFlag().setColor(teamInfo.getFlag().getColor());
 						team.getFlag().setSpawned(teamInfo.getFlag().isSpawned());
 						team.getFlag().setX(teamInfo.getFlag().getX());
@@ -89,7 +88,7 @@ public class CTFClientGame extends Thread {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			try {Thread.sleep(17);}catch (Exception e) {};
+			try {Thread.sleep(17);}catch (Exception e) { end();};
 		}
 	}
 

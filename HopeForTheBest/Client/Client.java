@@ -5,8 +5,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import CaptureTheFlagGame.Statistics;
+import Message.AllTeamInfo;
 import Message.Fire;
-import Message.GameInfo;
+import Message.GameboardInfo;
 import Message.Heading;
 import Message.NewPlayer;
 import Message.PlayerInfo;
@@ -18,7 +19,8 @@ public class Client{
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private GameInfo gameInfo;
+	private AllTeamInfo allTeamInfo;
+	private GameboardInfo gameboardInfo;
 	private PlayerInfo playerInfo;
 	private boolean running = true; 
 	public Client(String ip,int port) {
@@ -37,9 +39,6 @@ public class Client{
 	public void askForGameInfo() throws Exception{
 		out.writeObject(new ReQuestGameInfo());
 		out.flush();
-	}
-	public GameInfo getGameInfo() {
-		return gameInfo;
 	}
 	public void end() throws IOException{
 			running = false;
@@ -60,9 +59,6 @@ public class Client{
 	public ObjectInputStream getIn() {
 		return in;
 	}
-	public void setGameInfo(GameInfo gameInfo) {
-		this.gameInfo = gameInfo;
-	}
 	public PlayerInfo getPlayerInfo() {
 		return playerInfo;
 	}
@@ -76,4 +72,17 @@ public class Client{
 	public boolean isAlive() {
 		return !socket.isClosed();
 	}
+	public AllTeamInfo getAllTeamInfo() {
+		return allTeamInfo;
+	}
+	public void setAllTeamInfo(AllTeamInfo allTeamInfo) {
+		this.allTeamInfo = allTeamInfo;
+	}
+	public GameboardInfo getGameboardInfo() {
+		return gameboardInfo;
+	}
+	public void setGameboardInfo(GameboardInfo gameboardInfo) {
+		this.gameboardInfo = gameboardInfo;
+	}
+	
 }

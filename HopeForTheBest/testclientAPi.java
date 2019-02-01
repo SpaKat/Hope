@@ -8,9 +8,14 @@ import Message.PlayerInfo;
 public class testclientAPi extends Thread{
 
 	public static void main(String[] args) {
-		for (int j = 0; j < 1; j++) {
-			for (int i = 0; i < 1; i++) {
-				new testclientAPi(j);
+		for (int j = 0; j < 5; j++) {
+			for (int i = 0; i < 2; i++) {
+				new testclientAPi(j);try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -28,22 +33,15 @@ public class testclientAPi extends Thread{
 
 		Statistics stats = new Statistics(1, 1, 1, 85);
 
-		double heading = Math.PI;
-
 		try {
 			c.connect(stats, teamId);
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
-			//e2.printStackTrace();
+			e2.printStackTrace();
 		}
+		
 		try {
-			c.sendHeading(heading);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
-		}
-		try {
-
+			
 			while(c.isAlive()) {
 				c.requestPlayerInfo();
 				c.requestGameInfo();
@@ -59,7 +57,9 @@ public class testclientAPi extends Thread{
 					//	System.out.println(Math.atan2( c.getTeam(0).getFlag().getY() - player.getY() ,c.getTeam(0).getFlag().getX()-player.getX()  ));
 					}
 
-				} catch (Exception e) {
+				} catch (NullPointerException e) {
+					// TODO: handle exception
+				}catch (Exception e) {
 					e.printStackTrace();
 				}
 /*
@@ -84,18 +84,18 @@ public class testclientAPi extends Thread{
 				}
 */
 
-				try {Thread.sleep(17);}catch (Exception e) {}
+				try {Thread.sleep(25);}catch (Exception e) {}
 			}
 		}catch (Exception e) {
 			// TODO: handle exception
-			//	e.printStackTrace();
+				e.printStackTrace();
 		}
 		//System.out.println("TEST CLIENT DIED");
 		try {
 			c.end();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 

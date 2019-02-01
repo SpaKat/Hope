@@ -10,21 +10,25 @@ public class ReadThread extends Thread{
 	}
 	@Override
 	public void run(){
-		SetGameInfo gameinfo = new SetGameInfo(client);
+		SetGameBoardInfo gameboardinfo = new SetGameBoardInfo(client);
+		SetAllTeamInfo allTeaminfo = new SetAllTeamInfo(client);
 		SetPlayerInfo playerinfo = new SetPlayerInfo(client);
 		
 		while(client.isRunning()) {
 			try {
 				Object o = client.getIn().readObject();
 				switch (o.getClass().getSimpleName()) {
-				case "GameInfo":
-					gameinfo.setO(o);
-					gameinfo.interrupt();
+				case "GameboardInfo":
+					gameboardinfo.setO(o);
+					gameboardinfo.interrupt();
+					break;
+				case "AllTeamInfo":
+					allTeaminfo.setO(o);
+					allTeaminfo.interrupt();
 					break;
 				case "PlayerInfo":
 					playerinfo.setO(o);
 					playerinfo.interrupt();
-					//client.setPlayerInfo((PlayerInfo) o);
 					break;
 				default:
 					break;
@@ -34,7 +38,7 @@ public class ReadThread extends Thread{
 				//	e.printStackTrace();
 			}
 		}
-		gameinfo.interrupt();
+		gameboardinfo.interrupt();
 		playerinfo.interrupt();
 	}
 }

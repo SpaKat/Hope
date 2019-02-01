@@ -29,13 +29,13 @@ public class ClientAPI {
 		try {Thread.sleep(17);}catch (Exception e) {}
 	}
 	public GameboardInfo gameBoard() {
-		return client.getGameInfo().getGameboard();
+		return client.getGameboardInfo();
 	}
 	public AllTeamInfo allTeams() {
-		return client.getGameInfo().getTeam();
+		return client.getAllTeamInfo();
 	}
 	public TeamInfo getTeam(int index) throws IndexOutOfBoundsException{
-		return client.getGameInfo().getTeam().get(index);
+		return client.getAllTeamInfo().get(index);
 	}
 	public void sendHeading(double heading) throws IOException{
 		client.sendHeading(heading);

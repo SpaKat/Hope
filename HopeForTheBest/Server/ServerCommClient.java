@@ -2,6 +2,7 @@ package Server;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.DatagramSocket;
 import java.net.Socket;
 
 import CaptureTheFlagGame.GameManager;
@@ -23,6 +24,7 @@ public class ServerCommClient extends Thread {
 	public ServerCommClient(GameManager gManager,Socket socket) {
 		this.gManager = gManager;
 		this.socket = socket;
+	//	socket = new DatagramSocket(socket.getLocalSocketAddress());
 		setName("SERVER Client");
 		this.start();
 	}
@@ -52,9 +54,11 @@ public class ServerCommClient extends Thread {
 								sendPlayerInfo = new SendPlayerInfo(out, player);
 								if(!gManager.addPlayer(player, ((NewPlayer )message).getId())) {
 									socket.close();
+								//	System.out.println(!gManager.addPlayer(player, ((NewPlayer )message).getId()));
 								}
 							}else {
 								socket.close();
+							//	System.out.println(stats.getRateing());
 							}
 						}
 						newPlayer--;
@@ -79,12 +83,13 @@ public class ServerCommClient extends Thread {
 					}
 
 				} catch (Exception e) {
+					//e.printStackTrace();
 					running = false;
 				}
 				try {Thread.sleep(1);} catch (InterruptedException e) {	}	
 			}
 		} catch (Exception e1) {
-			e1.printStackTrace();
+		//	e1.printStackTrace();
 		}
 		System.out.println("SERVER CLIENT ENDED");
 		try {
@@ -92,7 +97,7 @@ public class ServerCommClient extends Thread {
 			System.out.println("SERVER CLIENT PLAYER ENDED");
 
 		}catch (Exception e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
 	}
 
